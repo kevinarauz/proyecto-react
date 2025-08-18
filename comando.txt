@@ -3,3 +3,6 @@ npm create vite@latest proyecto-react -- --template react-ts
 
 #Levantar claude
 claude --dangerously-skip-permissions
+
+#instalar route
+npm install react-router-dom
