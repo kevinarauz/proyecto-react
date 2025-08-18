@@ -1,0 +1,5 @@
+#Crear un proyecto con react
+npm create vite@latest proyecto-react -- --template react-ts
+
+#Levantar claude
+claude --dangerously-skip-permissions
