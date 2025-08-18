@@ -16,5 +16,10 @@ export const navigationItems: NavigationItems = [
     label: 'Contacto',
     icon: 'pi pi-envelope', 
     path: PATHS.CONTACT
+  },
+  {
+    label: 'Login',
+    icon: 'pi pi-sign-in', 
+    path: PATHS.LOGIN
   }
 ]
