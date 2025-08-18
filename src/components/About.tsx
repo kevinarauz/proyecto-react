@@ -1,5 +1,4 @@
-import { Card } from 'primereact/card'
-import { Chip } from 'primereact/chip'
+import { Card, Chip } from '../lib'
 
 function About() {
   const technologies = [

@@ -32,12 +32,31 @@ En tu archivo `src/index.css`:
 @import 'primeflex/primeflex.css';
 ```
 
+## Importaciones Centralizadas
+
+Para facilitar la reutilización en otros proyectos, se creó un archivo de importaciones centralizadas en `src/lib/index.ts`:
+
+```jsx
+// En lugar de múltiples imports
+import { Card } from 'primereact/card'
+import { Button } from 'primereact/button'
+import { InputText } from 'primereact/inputtext'
+
+// Usa un solo import
+import { Card, Button, InputText } from '../lib'
+```
+
+### Ventajas:
+- **Reutilización**: Copia solo la carpeta `lib/` a otro proyecto
+- **Mantenimiento**: Cambios centralizados de versiones
+- **Limpieza**: Imports más concisos
+- **TypeScript**: Tipos incluidos automáticamente
+
 ## Componentes PrimeReact implementados
 
 ### 1. Menubar (Navbar)
 ```jsx
-import { Menubar } from 'primereact/menubar'
-import { MenuItem } from 'primereact/menuitem'
+import { Menubar, MenuItem } from '../lib'
 
 const items: MenuItem[] = [
   {
@@ -57,7 +76,7 @@ const items: MenuItem[] = [
 
 ### 2. Card
 ```jsx
-import { Card } from 'primereact/card'
+import { Card } from '../lib'
 
 <Card title="Mi Título" className="m-2">
   <p>Contenido de la tarjeta</p>
@@ -66,7 +85,7 @@ import { Card } from 'primereact/card'
 
 ### 3. Chip (Etiquetas)
 ```jsx
-import { Chip } from 'primereact/chip'
+import { Chip } from '../lib'
 
 <Chip 
   label="React 18" 
@@ -77,10 +96,7 @@ import { Chip } from 'primereact/chip'
 
 ### 4. Formularios con InputText y FloatLabel
 ```jsx
-import { InputText } from 'primereact/inputtext'
-import { InputTextarea } from 'primereact/inputtextarea'
-import { FloatLabel } from 'primereact/floatlabel'
-import { Button } from 'primereact/button'
+import { useState, InputText, InputTextarea, FloatLabel, Button } from '../lib'
 
 <FloatLabel className="w-full mb-4">
   <InputText 

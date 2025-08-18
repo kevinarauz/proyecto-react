@@ -1,9 +1,4 @@
-import { useState } from 'react'
-import { Card } from 'primereact/card'
-import { InputText } from 'primereact/inputtext'
-import { InputTextarea } from 'primereact/inputtextarea'
-import { Button } from 'primereact/button'
-import { FloatLabel } from 'primereact/floatlabel'
+import { useState, Card, InputText, InputTextarea, Button, FloatLabel } from '../lib'
 
 function Contact() {
   const [name, setName] = useState('')

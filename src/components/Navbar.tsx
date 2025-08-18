@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Menubar } from 'primereact/menubar'
+import { Link, Menubar } from '../lib'
 
 function Navbar() {
   const items = [
