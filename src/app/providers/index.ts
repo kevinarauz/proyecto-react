@@ -1,0 +1,1 @@
+export { withRouter, WithRouter } from './with-router'

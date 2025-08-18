@@ -1,6 +1,6 @@
-import { Card, Chip } from '../lib'
+import { Card, Chip } from 'shared/lib'
 
-function About() {
+function AboutPage() {
   const technologies = [
     'React 18',
     'TypeScript', 
@@ -36,4 +36,4 @@ function About() {
   )
 }
 
-export default About
+export default AboutPage

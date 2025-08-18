@@ -1,6 +1,6 @@
-import { Card } from '../lib'
+import { Card } from 'shared/lib'
 
-function Home() {
+function HomePage() {
   return (
     <div className="grid">
       <div className="col-12">
@@ -18,4 +18,4 @@ function Home() {
   )
 }
 
-export default Home
+export default HomePage
