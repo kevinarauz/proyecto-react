@@ -1,21 +1,25 @@
+import Spinner from './Spinner'
+
 interface LoadingProps {
   size?: 'small' | 'medium' | 'large'
   message?: string
   fullScreen?: boolean
   className?: string
+  color?: string
 }
 
 function Loading({ 
   size = 'medium', 
   message = 'Cargando...', 
   fullScreen = false,
-  className = ''
+  className = '',
+  color = '#007bff'
 }: LoadingProps) {
-  const getSizeClass = () => {
+  const getSize = () => {
     switch (size) {
-      case 'small': return 'w-2rem h-2rem'
-      case 'large': return 'w-6rem h-6rem'
-      default: return 'w-4rem h-4rem'
+      case 'small': return 24
+      case 'large': return 64
+      default: return 40
     }
   }
 
@@ -34,8 +38,7 @@ function Loading({
   return (
     <div className={containerClass}>
       <div className="flex align-items-center justify-content-center">
-        <i className={`pi pi-spin pi-spinner text-primary ${getSizeClass()}`} 
-           style={{ fontSize: size === 'small' ? '1rem' : size === 'large' ? '3rem' : '2rem' }}></i>
+        <Spinner size={getSize()} color={color} />
       </div>
       
       {message && (

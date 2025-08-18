@@ -46,17 +46,17 @@ function HomePage() {
           <div className="grid mt-4">
             <div className="col-12 md:col-4">
               <Card title="Loading pequeño" className="h-full">
-                <Loading size="small" message="Pequeño" />
+                <Loading size="small" message="Pequeño" color="#10b981" />
               </Card>
             </div>
             <div className="col-12 md:col-4">
               <Card title="Loading mediano" className="h-full">
-                <Loading size="medium" message="Mediano" />
+                <Loading size="medium" message="Mediano" color="#3b82f6" />
               </Card>
             </div>
             <div className="col-12 md:col-4">
               <Card title="Loading grande" className="h-full">
-                <Loading size="large" message="Grande" />
+                <Loading size="large" message="Grande" color="#f59e0b" />
               </Card>
             </div>
           </div>
