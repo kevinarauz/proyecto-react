@@ -21,6 +21,7 @@ Este es un proyecto de React para aprendizaje.
 - React 18
 - TypeScript
 - Vite
+- React Router DOM
 - ESLint
 
 ## Cómo empezar
@@ -28,3 +29,11 @@ Este es un proyecto de React para aprendizaje.
 1. Instala las dependencias: `npm install`
 2. Inicia el servidor de desarrollo: `npm run dev`
 3. Abre tu navegador en `http://localhost:5173`
+
+## Instalación de dependencias adicionales
+
+### React Router DOM
+Para agregar navegación SPA al proyecto:
+```bash
+npm install react-router-dom
+```
