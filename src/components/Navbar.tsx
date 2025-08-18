@@ -1,37 +1,44 @@
 import { Link } from 'react-router-dom'
+import { Menubar } from 'primereact/menubar'
 
 function Navbar() {
+  const items = [
+    {
+      label: 'Inicio',
+      icon: 'pi pi-home',
+      template: (item) => (
+        <Link to="/" className="p-menuitem-link">
+          <span className={item.icon}></span>
+          <span className="p-menuitem-text">{item.label}</span>
+        </Link>
+      )
+    },
+    {
+      label: 'Acerca de',
+      icon: 'pi pi-info-circle',
+      template: (item) => (
+        <Link to="/about" className="p-menuitem-link">
+          <span className={item.icon}></span>
+          <span className="p-menuitem-text">{item.label}</span>
+        </Link>
+      )
+    },
+    {
+      label: 'Contacto',
+      icon: 'pi pi-envelope',
+      template: (item) => (
+        <Link to="/contact" className="p-menuitem-link">
+          <span className={item.icon}></span>
+          <span className="p-menuitem-text">{item.label}</span>
+        </Link>
+      )
+    }
+  ]
+
   return (
-    <nav style={{ 
-      padding: '1rem', 
-      backgroundColor: '#f0f0f0', 
-      marginBottom: '2rem',
-      borderBottom: '1px solid #ddd'
-    }}>
-      <ul style={{ 
-        listStyle: 'none', 
-        display: 'flex', 
-        gap: '2rem', 
-        margin: 0, 
-        padding: 0 
-      }}>
-        <li>
-          <Link to="/" style={{ textDecoration: 'none', color: '#007bff' }}>
-            Inicio
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" style={{ textDecoration: 'none', color: '#007bff' }}>
-            Acerca de
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" style={{ textDecoration: 'none', color: '#007bff' }}>
-            Contacto
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <div className="card">
+      <Menubar model={items} />
+    </div>
   )
 }
 

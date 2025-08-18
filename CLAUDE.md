@@ -22,6 +22,9 @@ Este es un proyecto de React para aprendizaje.
 - TypeScript
 - Vite
 - React Router DOM
+- PrimeReact
+- PrimeFlex
+- PrimeIcons
 - ESLint
 
 ## Cómo empezar
@@ -36,4 +39,10 @@ Este es un proyecto de React para aprendizaje.
 Para agregar navegación SPA al proyecto:
 ```bash
 npm install react-router-dom
+```
+
+### PrimeReact + PrimeFlex + PrimeIcons
+Para agregar componentes UI profesionales y sistema de grid:
+```bash
+npm install primereact primeicons primeflex
 ```

@@ -1,23 +1,81 @@
+import { useState } from 'react'
+import { Card } from 'primereact/card'
+import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea'
+import { Button } from 'primereact/button'
+import { FloatLabel } from 'primereact/floatlabel'
+
 function Contact() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log({ name, email, message })
+    // Aquí puedes manejar el envío del formulario
+  }
+
   return (
-    <div>
-      <h1>Contacto</h1>
-      <p>¿Tienes preguntas sobre React?</p>
-      <form>
-        <div>
-          <label htmlFor="name">Nombre:</label>
-          <input type="text" id="name" />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" />
-        </div>
-        <div>
-          <label htmlFor="message">Mensaje:</label>
-          <textarea id="message" rows={4}></textarea>
-        </div>
-        <button type="submit">Enviar</button>
-      </form>
+    <div className="grid">
+      <div className="col-12 md:col-8 md:col-offset-2">
+        <Card title="Contacto" className="m-2">
+          <p className="text-lg mb-4">
+            ¿Tienes preguntas sobre React? ¡Contáctanos!
+          </p>
+          
+          <form onSubmit={handleSubmit}>
+            <div className="grid">
+              <div className="col-12 md:col-6">
+                <FloatLabel className="w-full mb-4">
+                  <InputText 
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full"
+                  />
+                  <label htmlFor="name">Nombre</label>
+                </FloatLabel>
+              </div>
+              
+              <div className="col-12 md:col-6">
+                <FloatLabel className="w-full mb-4">
+                  <InputText 
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full"
+                  />
+                  <label htmlFor="email">Email</label>
+                </FloatLabel>
+              </div>
+              
+              <div className="col-12">
+                <FloatLabel className="w-full mb-4">
+                  <InputTextarea 
+                    id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={4}
+                    className="w-full"
+                  />
+                  <label htmlFor="message">Mensaje</label>
+                </FloatLabel>
+              </div>
+              
+              <div className="col-12">
+                <Button 
+                  type="submit"
+                  label="Enviar"
+                  icon="pi pi-send"
+                  className="p-button-primary"
+                />
+              </div>
+            </div>
+          </form>
+        </Card>
+      </div>
     </div>
   )
 }
