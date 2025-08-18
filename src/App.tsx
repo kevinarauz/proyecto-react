@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'shared/lib'
+import { Routes, Route } from 'shared/lib'
 import { PATHS } from 'shared/config'
 import { WithRouter, AuthProvider, ProtectedRoute } from './app/providers'
 import { Navbar } from 'widgets/Navbar'
@@ -15,23 +15,34 @@ function App() {
         <div className="min-h-screen flex flex-column">
           <Routes>
             <Route path={PATHS.LOGIN} element={<LoginPage />} />
-            <Route 
-              path="/" 
-              element={<Navigate to={PATHS.LOGIN} replace />} 
-            />
-            <Route path="*" element={
+            <Route path={PATHS.HOME} element={
               <ProtectedRoute>
                 <Navbar />
                 <main className="flex-grow-1 p-2">
-                  <Routes>
-                    <Route path={PATHS.HOME} element={<HomePage />} />
-                    <Route path={PATHS.ABOUT} element={<AboutPage />} />
-                    <Route path={PATHS.CONTACT} element={<ContactPage />} />
-                  </Routes>
+                  <HomePage />
                 </main>
                 <Footer />
               </ProtectedRoute>
             } />
+            <Route path={PATHS.ABOUT} element={
+              <ProtectedRoute>
+                <Navbar />
+                <main className="flex-grow-1 p-2">
+                  <AboutPage />
+                </main>
+                <Footer />
+              </ProtectedRoute>
+            } />
+            <Route path={PATHS.CONTACT} element={
+              <ProtectedRoute>
+                <Navbar />
+                <main className="flex-grow-1 p-2">
+                  <ContactPage />
+                </main>
+                <Footer />
+              </ProtectedRoute>
+            } />
+            <Route path="/" element={<LoginPage />} />
           </Routes>
         </div>
       </AuthProvider>
