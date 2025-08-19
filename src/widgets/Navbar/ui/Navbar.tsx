@@ -13,7 +13,7 @@ function Navbar() {
     icon: item.icon,
     template: (menuItem: any) => (
       <Link to={item.path} className="p-menuitem-link">
-        <span className={menuItem.icon}></span>
+        <span className={`${menuItem.icon} mr-2`}></span>
         <span className="p-menuitem-text">{menuItem.label}</span>
       </Link>
     )
