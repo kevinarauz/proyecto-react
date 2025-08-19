@@ -8,6 +8,11 @@ export const navigationItems: NavigationItems = [
     path: PATHS.HOME
   },
   {
+    label: 'Posts', 
+    icon: 'pi pi-file-edit',
+    path: PATHS.POSTS
+  },
+  {
     label: 'Acerca de', 
     icon: 'pi pi-info-circle',
     path: PATHS.ABOUT

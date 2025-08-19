@@ -6,6 +6,7 @@ import { Footer } from 'widgets/Footer'
 import { HomePage } from 'pages/home'
 import { AboutPage } from 'pages/about'
 import { ContactPage } from 'pages/contact'
+import { PostsPage } from 'pages/posts'
 import { LoginPage } from 'pages/login'
 
 function App() {
@@ -20,6 +21,15 @@ function App() {
                 <Navbar />
                 <main className="flex-grow-1 p-2">
                   <HomePage />
+                </main>
+                <Footer />
+              </ProtectedRoute>
+            } />
+            <Route path={PATHS.POSTS} element={
+              <ProtectedRoute>
+                <Navbar />
+                <main className="flex-grow-1 p-2">
+                  <PostsPage />
                 </main>
                 <Footer />
               </ProtectedRoute>
