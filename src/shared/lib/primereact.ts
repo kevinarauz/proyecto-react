@@ -8,6 +8,8 @@ export { Menubar } from 'primereact/menubar'
 export { Chip } from 'primereact/chip'
 export { DataTable } from 'primereact/datatable'
 export { Column } from 'primereact/column'
+export { ConfirmDialog } from 'primereact/confirmdialog'
+export { confirmDialog } from 'primereact/confirmdialog'
 
 // Re-export React Router
 export { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'

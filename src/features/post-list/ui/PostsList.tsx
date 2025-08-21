@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, DataTable, Column, InputText } from 'shared/lib'
+import { Button, DataTable, Column, InputText, ConfirmDialog } from 'shared/lib'
 import { Loading } from 'shared/ui'
 import { DeletePostButton } from 'features/post-delete'
 import { usePosts } from '../model/usePosts'
@@ -207,9 +207,9 @@ function PostsList({
                 value={globalFilter}
                 onChange={(e) => setGlobalFilter(e.target.value)}
                 placeholder="Buscar en posts..."
-                className={`w-full pl-5 pr-3 py-2 border-1 border-300 border-round-md hover:border-primary-300 focus:border-primary-500 focus:shadow-0 ${styles['search-input-enhanced']}`}
+                className={`w-full pr-3 py-2 border-1 border-300 border-round-md hover:border-primary-300 focus:border-primary-500 focus:shadow-0 ${styles['search-input-enhanced']}`}
                 style={{
-                  paddingLeft: '2.5rem',
+                  paddingLeft: '3rem',
                   transition: 'all 0.2s ease'
                 }}
               />
@@ -316,6 +316,7 @@ function PostsList({
           </DataTable>
         </div>
       )}
+      <ConfirmDialog />
     </div>
   )
 }
