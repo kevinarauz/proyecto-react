@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'shared/lib'
 import { Button } from 'shared/lib'
 import { useDeletePost } from '../model/useDeletePost'
@@ -8,7 +9,24 @@ interface DeletePostButtonProps {
   onSuccess?: (postId: number) => void
   className?: string
   tooltip?: string
-  buttonProps?: any
+  buttonProps?: Record<string, unknown>
+}
+
+// Función de comparación para DeletePostButton
+const areDeletePostButtonPropsEqual = (
+  prevProps: DeletePostButtonProps,
+  nextProps: DeletePostButtonProps
+): boolean => {
+  // Comparar todas las props relevantes
+  return (
+    prevProps.postId === nextProps.postId &&
+    prevProps.postTitle === nextProps.postTitle &&
+    prevProps.onSuccess === nextProps.onSuccess &&
+    prevProps.className === nextProps.className &&
+    prevProps.tooltip === nextProps.tooltip &&
+    // Comparación superficial para buttonProps
+    JSON.stringify(prevProps.buttonProps) === JSON.stringify(nextProps.buttonProps)
+  )
 }
 
 function DeletePostButton({ 
@@ -92,4 +110,7 @@ function DeletePostButton({
   )
 }
 
-export default DeletePostButton
+// Memoizar DeletePostButton para optimizar re-renders
+// Beneficios: Evita re-renders innecesarios del botón y su estado de confirmación
+// especialmente útil cuando se renderiza en listas largas
+export default React.memo(DeletePostButton, areDeletePostButtonPropsEqual)

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from 'shared/lib'
 import { Loading } from 'shared/ui'
 import { usePosts } from '../model/usePosts'
@@ -6,7 +7,21 @@ interface PostsListProps {
   onCreatePost?: () => void
   onEditPost?: (postId: number) => void
   onDeletePost?: (postId: number) => void
-  renderPost?: (post: any) => React.ReactNode
+  renderPost?: (post: unknown) => React.ReactNode
+}
+
+// Función de comparación personalizada para optimizar re-renders
+const arePostsListPropsEqual = (
+  prevProps: PostsListProps, 
+  nextProps: PostsListProps
+): boolean => {
+  // Comparar funciones callback por referencia
+  return (
+    prevProps.onCreatePost === nextProps.onCreatePost &&
+    prevProps.onEditPost === nextProps.onEditPost &&
+    prevProps.onDeletePost === nextProps.onDeletePost &&
+    prevProps.renderPost === nextProps.renderPost
+  )
 }
 
 function PostsList({ 
@@ -114,4 +129,7 @@ function PostsList({
   )
 }
 
-export default PostsList
+// Memoizar el componente con comparación personalizada
+// Beneficios: Evita re-renders cuando las props callback no cambian por referencia
+// Especialmente útil cuando renderiza listas grandes de posts
+export default React.memo(PostsList, arePostsListPropsEqual)

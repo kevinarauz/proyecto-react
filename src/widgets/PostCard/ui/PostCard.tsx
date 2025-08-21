@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, Button } from 'shared/lib'
 import { DeletePostButton } from 'features/post-delete'
 import type { Post } from 'entities/post'
@@ -10,6 +11,36 @@ interface PostCardProps {
   className?: string
 }
 
+// Función pura para truncar texto - se optimiza automáticamente por JavaScript engine
+const truncateText = (text: string, maxLength: number = 150): string => {
+  return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text
+}
+
+// Función de comparación personalizada para PostCard
+const arePostCardPropsEqual = (
+  prevProps: PostCardProps,
+  nextProps: PostCardProps
+): boolean => {
+  // Comparar el objeto post por propiedades críticas
+  const postChanged = (
+    prevProps.post.id !== nextProps.post.id ||
+    prevProps.post.title !== nextProps.post.title ||
+    prevProps.post.body !== nextProps.post.body ||
+    prevProps.post.userId !== nextProps.post.userId
+  )
+  
+  // Si el post cambió, siempre re-renderizar
+  if (postChanged) return false
+  
+  // Comparar otras props
+  return (
+    prevProps.onEdit === nextProps.onEdit &&
+    prevProps.onDelete === nextProps.onDelete &&
+    prevProps.showActions === nextProps.showActions &&
+    prevProps.className === nextProps.className
+  )
+}
+
 function PostCard({ 
   post, 
   onEdit, 
@@ -17,9 +48,6 @@ function PostCard({
   showActions = true,
   className = ''
 }: PostCardProps) {
-  const truncateText = (text: string, maxLength: number = 150) => {
-    return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text
-  }
 
   return (
     <Card className={`hover:shadow-3 transition-all transition-duration-300 ${className}`}>
@@ -95,4 +123,9 @@ function PostCard({
   )
 }
 
-export default PostCard
+// Memoizar PostCard con comparación personalizada
+// Beneficios: 
+// - Evita re-renders cuando las props no han cambiado realmente
+// - Optimiza el cálculo costoso de truncateText y conteo de palabras
+// - Especialmente útil en listas grandes donde múltiples PostCards se renderizan
+export default React.memo(PostCard, arePostCardPropsEqual)

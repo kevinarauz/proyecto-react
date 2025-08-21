@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, InputText, InputTextarea, Button, FloatLabel } from 'shared/lib'
 import { Loading } from 'shared/ui'
 import { useEditPost } from '../model/useEditPost'
@@ -7,6 +8,19 @@ interface EditPostFormProps {
   postId: number
   onSuccess?: (post: Post) => void
   onCancel?: () => void
+}
+
+// Función de comparación para EditPostForm
+const areEditPostFormPropsEqual = (
+  prevProps: EditPostFormProps,
+  nextProps: EditPostFormProps
+): boolean => {
+  // Solo re-renderizar si cambian props críticas
+  return (
+    prevProps.postId === nextProps.postId &&
+    prevProps.onSuccess === nextProps.onSuccess &&
+    prevProps.onCancel === nextProps.onCancel
+  )
 }
 
 function EditPostForm({ postId, onSuccess, onCancel }: EditPostFormProps) {
@@ -128,4 +142,7 @@ function EditPostForm({ postId, onSuccess, onCancel }: EditPostFormProps) {
   )
 }
 
-export default EditPostForm
+// Memoizar EditPostForm para optimizar re-renders
+// Beneficios: Evita re-cargar datos del post innecesariamente
+// y previene re-renders costosos del formulario durante edición
+export default React.memo(EditPostForm, areEditPostFormPropsEqual)

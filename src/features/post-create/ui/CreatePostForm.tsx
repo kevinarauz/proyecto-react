@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, InputText, InputTextarea, Button, FloatLabel } from 'shared/lib'
 import { Loading } from 'shared/ui'
 import { useCreatePost } from '../model/useCreatePost'
@@ -6,6 +7,18 @@ import type { Post } from 'entities/post'
 interface CreatePostFormProps {
   onSuccess?: (post: Post) => void
   onCancel?: () => void
+}
+
+// Función de comparación para CreatePostForm
+const areCreatePostFormPropsEqual = (
+  prevProps: CreatePostFormProps,
+  nextProps: CreatePostFormProps
+): boolean => {
+  // Solo re-renderizar si las funciones callback cambian por referencia
+  return (
+    prevProps.onSuccess === nextProps.onSuccess &&
+    prevProps.onCancel === nextProps.onCancel
+  )
 }
 
 function CreatePostForm({ onSuccess, onCancel }: CreatePostFormProps) {
@@ -106,4 +119,7 @@ function CreatePostForm({ onSuccess, onCancel }: CreatePostFormProps) {
   )
 }
 
-export default CreatePostForm
+// Memoizar CreatePostForm para optimizar re-renders
+// Beneficios: Evita re-renders innecesarios del formulario complejo
+// especialmente cuando el componente padre actualiza estado no relacionado
+export default React.memo(CreatePostForm, areCreatePostFormPropsEqual)
