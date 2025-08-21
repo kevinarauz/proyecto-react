@@ -24,16 +24,22 @@ src/
 │   ├── home/             # Página de inicio
 │   ├── about/            # Página acerca de  
 │   ├── contact/          # Página de contacto
+│   ├── posts/            # Página de gestión de posts
 │   └── login/            # Página de login
 ├── widgets/               # 🧩 Componentes complejos reutilizables
 │   ├── Navbar/           # Barra de navegación con auth
 │   └── Footer/           # Pie de página
 ├── features/              # ⚡ Funcionalidades específicas
 │   ├── auth/login/       # Sistema de autenticación
-│   └── contact/send-message/  # Feature de formulario de contacto
+│   ├── contact/send-message/  # Feature de formulario de contacto
+│   ├── post-create/      # Feature crear posts
+│   ├── post-edit/        # Feature editar posts  
+│   ├── post-list/        # Feature listar posts con DataTable
+│   └── post-delete/      # Feature eliminar posts
 ├── entities/              # 🏗️ Modelos de negocio
 │   ├── user/             # Entidad usuario con auth
-│   └── navigation/       # Entidad de navegación
+│   ├── navigation/       # Entidad de navegación
+│   └── post/             # Entidad posts con API
 └── shared/                # 🔧 Código agnóstico reutilizable
     ├── ui/               # Componentes UI (Loading, Spinner)
     ├── config/           # Configuraciones (rutas, constantes)
@@ -57,12 +63,18 @@ Los imports utilizan aliases absolutos configurados en `vite.config.ts` y `tscon
 - `shared/lib` → `src/shared/lib`
 - `shared/ui` → `src/shared/ui`
 - `entities/user` → `src/entities/user`
-- `entities/navigation` → `src/entities/navigation`  
+- `entities/navigation` → `src/entities/navigation`
+- `entities/post` → `src/entities/post`
 - `features/auth/login` → `src/features/auth/login`
 - `features/contact/send-message` → `src/features/contact/send-message`
+- `features/post-create` → `src/features/post-create`
+- `features/post-edit` → `src/features/post-edit`
+- `features/post-list` → `src/features/post-list`
+- `features/post-delete` → `src/features/post-delete`
 - `widgets/Navbar` → `src/widgets/Navbar`
 - `widgets/Footer` → `src/widgets/Footer`
 - `pages/home` → `src/pages/home`
+- `pages/posts` → `src/pages/posts`
 - `pages/login` → `src/pages/login`
 - `app/providers` → `src/app/providers`
 
@@ -104,16 +116,28 @@ npm install primereact primeicons primeflex
 - **Redirección automática**: Login exitoso → Home, logout → Login
 - **Context global**: AuthProvider con hooks useAuth
 
+### 📝 Sistema de Posts (CRUD Completo)
+- **DataTable avanzado**: PrimeReact con paginación (10 registros/página)
+- **Búsqueda global**: Filtrado en tiempo real por título, contenido y autor
+- **Crear posts**: Formulario con validación para nuevos posts
+- **Editar posts**: Modificación inline de posts existentes
+- **Eliminar posts**: Modal de confirmación antes de eliminar
+- **API Integration**: JSONPlaceholder para datos mock
+- **Optimizaciones**: React.memo para mejorar performance
+- **Responsive design**: Adaptado para móvil y desktop
+
 ### 🎨 Componentes UI
 - **Loading**: Componente con 3 tamaños y spinner SVG animado
 - **Spinner**: SVG independiente con animaciones CSS
 - **Footer**: Información del proyecto y tecnologías
 - **Navbar**: Navegación con estado de autenticación y logout
+- **DataTable**: Implementación avanzada con ordenamiento y filtros
+- **ConfirmDialog**: Modales de confirmación para acciones destructivas
 
 ### 🛣️ Navegación
 - **Ruta por defecto**: `/` redirige a `/login`
 - **Rutas públicas**: `/login`
-- **Rutas protegidas**: `/home`, `/about`, `/contact`
+- **Rutas protegidas**: `/home`, `/about`, `/contact`, `/posts`
 - **ProtectedRoute**: Componente que verifica autenticación
 
 ## Flujo de la aplicación
