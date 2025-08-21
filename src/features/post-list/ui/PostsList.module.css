@@ -1,0 +1,121 @@
+/* Estilos específicos del módulo Posts */
+
+.posts-module {
+  --transition-base: all 0.2s ease;
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animaciones para el buscador */
+.search-input-container {
+  position: relative;
+  transition: var(--transition-base);
+}
+
+.search-input-container:focus-within {
+  transform: translateY(-1px);
+}
+
+.search-input-enhanced {
+  transition: var(--transition-base);
+  border: 1px solid var(--surface-300);
+}
+
+.search-input-enhanced:hover {
+  border-color: var(--primary-300);
+  box-shadow: var(--shadow-light);
+}
+
+.search-input-enhanced:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+  outline: none;
+}
+
+/* Animaciones para los botones */
+.action-button {
+  transition: var(--transition-base);
+  border-radius: 8px;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Mejoras para el header */
+.module-header {
+  background: linear-gradient(135deg, var(--surface-0) 0%, var(--surface-50) 100%);
+  border: 1px solid var(--surface-200);
+}
+
+.module-icon-container {
+  background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-50) 100%);
+  border: 1px solid var(--primary-200);
+}
+
+/* Mejoras para el toolbar */
+.actions-toolbar {
+  background: var(--surface-0);
+  border: 1px solid var(--surface-200);
+}
+
+/* Mejoras para la tabla */
+.table-container {
+  background: var(--surface-0);
+  border: 1px solid var(--surface-200);
+  overflow: hidden;
+}
+
+/* Estados responsive mejorados */
+@media (max-width: 768px) {
+  .search-input-container {
+    margin-bottom: 0.75rem;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .module-header {
+    padding: 1rem !important;
+  }
+  
+  .actions-toolbar {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Animaciones para empty states */
+.empty-state-icon {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Mejoras para los badges y elementos pequeños */
+.status-badge {
+  transition: var(--transition-base);
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .posts-module {
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}

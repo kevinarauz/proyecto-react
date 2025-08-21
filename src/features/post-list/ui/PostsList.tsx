@@ -4,6 +4,7 @@ import { Loading } from 'shared/ui'
 import { DeletePostButton } from 'features/post-delete'
 import { usePosts } from '../model/usePosts'
 import type { Post } from 'entities/post'
+import styles from './PostsList.module.css'
 
 interface PostsListProps {
   onCreatePost?: () => void
@@ -65,8 +66,8 @@ function PostsList({
   const idBodyTemplate = (rowData: Post) => {
     return (
       <div className="flex align-items-center">
-        <div className="bg-blue-100 border-round px-2 py-1">
-          <span className="text-sm font-semibold text-blue-800">#{rowData.id}</span>
+        <div className={`bg-primary-50 border-round-lg px-3 py-1 border-1 border-primary-200 ${styles['status-badge']}`}>
+          <span className="text-sm font-semibold text-primary-700">#{rowData.id}</span>
         </div>
       </div>
     )
@@ -76,9 +77,13 @@ function PostsList({
   const titleBodyTemplate = (rowData: Post) => {
     return (
       <div className="flex flex-column">
-        <span className="font-semibold text-900 line-height-3">
+        <span className="font-semibold text-900 line-height-3 mb-1">
           {rowData.title}
         </span>
+        <div className="flex align-items-center gap-1">
+          <i className="pi pi-bookmark-fill text-xs text-primary-500"></i>
+          <span className="text-xs text-500">Post #{rowData.id}</span>
+        </div>
       </div>
     )
   }
@@ -107,8 +112,13 @@ function PostsList({
   const authorBodyTemplate = (rowData: Post) => {
     return (
       <div className="flex align-items-center gap-2">
-        <i className="pi pi-user text-400"></i>
-        <span className="text-600">Usuario {rowData.userId}</span>
+        <div className="bg-surface-100 border-round-full w-2rem h-2rem flex align-items-center justify-content-center">
+          <i className="pi pi-user text-surface-600 text-sm"></i>
+        </div>
+        <div className="flex flex-column">
+          <span className="text-900 font-medium text-sm">Usuario {rowData.userId}</span>
+          <span className="text-500 text-xs">Autor</span>
+        </div>
       </div>
     )
   }
@@ -117,8 +127,13 @@ function PostsList({
   const dateBodyTemplate = (rowData: Post) => {
     return (
       <div className="flex align-items-center gap-2">
-        <i className="pi pi-calendar text-400"></i>
-        <span className="text-600 text-sm">JSONPlaceholder</span>
+        <div className="bg-orange-50 border-round p-1">
+          <i className="pi pi-calendar text-orange-600 text-sm"></i>
+        </div>
+        <div className="flex flex-column">
+          <span className="text-900 text-sm">JSONPlaceholder</span>
+          <span className="text-500 text-xs">API Simulada</span>
+        </div>
       </div>
     )
   }
@@ -157,57 +172,109 @@ function PostsList({
   const currentPageReportTemplate = 'Mostrando {first} a {last} de {totalRecords} posts'
 
   return (
-    <div>
-      <div className="flex justify-content-between align-items-center mb-4">
-        <h2 className="text-2xl font-semibold text-900 m-0">
-          Posts ({posts.length})
-        </h2>
-        {onCreatePost && (
-          <Button
-            label="Crear Post"
-            icon="pi pi-plus"
-            onClick={onCreatePost}
-            className="p-button-success"
-          />
-        )}
-      </div>
-
-      {/* Buscador Global */}
-      <div className="mb-4">
-        <div className="p-input-icon-left w-full md:w-20rem">
-          <i className="pi pi-search" />
-          <InputText
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            placeholder="Buscar posts..."
-            className="w-full"
-          />
+    <div className={`${styles['posts-module']} posts-module`}>
+      {/* Header del Módulo */}
+      <div className={`surface-card border-round-lg p-4 mb-4 shadow-1 ${styles['module-header']}`}>
+        <div className="flex align-items-start justify-content-between">
+          <div className="flex align-items-start gap-3">
+            <div className={`bg-primary-100 border-round-lg p-2 ${styles['module-icon-container']}`}>
+              <i className="pi pi-file-edit text-primary-600 text-2xl"></i>
+            </div>
+            <div>
+              <div className="flex align-items-center gap-2 mb-1">
+                <h1 className="text-2xl font-bold text-900 m-0">Posts</h1>
+                <div className="bg-primary-500 border-round-xl px-2 py-1">
+                  <span className="text-xs font-semibold text-white">{posts.length}</span>
+                </div>
+              </div>
+              <p className="text-600 m-0 line-height-3">Gestiona y organiza todos tus posts</p>
+            </div>
+          </div>
+          <div className="hidden md:block">
+            <i className="pi pi-bookmark text-300 text-3xl"></i>
+          </div>
         </div>
       </div>
 
+      {/* Barra de Acciones */}
+      <div className={`surface-card border-round-lg p-3 mb-4 shadow-1 ${styles['actions-toolbar']}`}>
+        <div className="flex flex-column md:flex-row gap-3 md:align-items-center md:justify-content-between">
+          {/* Buscador Mejorado */}
+          <div className={`flex-1 md:max-w-20rem ${styles['search-input-container']}`}>
+            <span className="p-input-icon-left w-full">
+              <i className="pi pi-search text-400"></i>
+              <InputText
+                value={globalFilter}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+                placeholder="Buscar en posts..."
+                className={`w-full pl-5 pr-3 py-2 border-1 border-300 border-round-md hover:border-primary-300 focus:border-primary-500 focus:shadow-0 ${styles['search-input-enhanced']}`}
+                style={{
+                  paddingLeft: '2.5rem',
+                  transition: 'all 0.2s ease'
+                }}
+              />
+            </span>
+          </div>
+          
+          {/* Botones de Acción */}
+          <div className="flex gap-2">
+            {onCreatePost && (
+              <Button
+                label="Crear Post"
+                icon="pi pi-plus"
+                onClick={onCreatePost}
+                className={`p-button-primary font-semibold px-4 py-2 ${styles['action-button']}`}
+                style={{
+                  borderRadius: '8px',
+                  transition: 'all 0.2s ease'
+                }}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Contenido Principal */}
       {posts.length === 0 && !isLoading ? (
-        <div className="text-center p-6">
-          <i className="pi pi-inbox text-4xl text-400 mb-3"></i>
-          <p className="text-600 text-lg">No hay posts disponibles</p>
+        <div className="surface-card border-round-lg p-6 text-center shadow-1">
+          <div className="mb-4">
+            <i className={`pi pi-inbox text-6xl text-300 mb-3 ${styles['empty-state-icon']}`}></i>
+          </div>
+          <h3 className="text-900 font-semibold mb-2">No hay posts disponibles</h3>
+          <p className="text-600 mb-4 line-height-3">Comienza creando tu primer post para gestionar tu contenido</p>
+          {onCreatePost && (
+            <Button
+              label="Crear mi primer post"
+              icon="pi pi-plus"
+              onClick={onCreatePost}
+              className={`p-button-primary p-button-lg ${styles['action-button']}`}
+            />
+          )}
         </div>
       ) : (
-        <DataTable
-          value={posts}
-          paginator={true}
-          rows={10}
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          paginatorTemplate={paginatorTemplate}
-          currentPageReportTemplate={currentPageReportTemplate}
-          className="p-datatable-sm"
-          stripedRows={true}
-          responsiveLayout="stack"
-          breakpoint="768px"
-          emptyMessage="No se encontraron posts"
-          loading={isLoading}
-          tableStyle={{ minWidth: '50rem' }}
-          globalFilter={globalFilter}
-          globalFilterFields={['title', 'body', 'userId']}
-        >
+        <div className={`surface-card border-round-lg shadow-1 ${styles['table-container']}`}>
+          <DataTable
+            value={posts}
+            paginator={true}
+            rows={10}
+            rowsPerPageOptions={[5, 10, 25, 50]}
+            paginatorTemplate={paginatorTemplate}
+            currentPageReportTemplate={currentPageReportTemplate}
+            className="p-datatable-sm border-none"
+            stripedRows={true}
+            responsiveLayout="stack"
+            breakpoint="768px"
+            emptyMessage={
+              <div className="text-center py-6">
+                <i className="pi pi-search text-3xl text-300 mb-3"></i>
+                <p className="text-600">No se encontraron posts que coincidan con tu búsqueda</p>
+              </div>
+            }
+            loading={isLoading}
+            tableStyle={{ minWidth: '50rem' }}
+            globalFilter={globalFilter}
+            globalFilterFields={['title', 'body', 'userId']}
+          >
           <Column 
             field="id" 
             header="ID" 
@@ -246,7 +313,8 @@ function PostsList({
             exportable={false}
             style={{ width: '120px', minWidth: '120px' }}
           />
-        </DataTable>
+          </DataTable>
+        </div>
       )}
     </div>
   )
