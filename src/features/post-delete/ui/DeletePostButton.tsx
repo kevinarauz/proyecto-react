@@ -62,9 +62,6 @@ function DeletePostButton({
       headerStyle: {
         padding: '1.5rem 2rem 1rem 2rem',
         fontSize: '1.2rem'
-      },
-      footerStyle: {
-        padding: '1rem 2rem 1.5rem 2rem'
       }
     })
   }
