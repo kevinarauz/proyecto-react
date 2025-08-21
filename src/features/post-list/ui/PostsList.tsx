@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, DataTable, Column } from 'shared/lib'
+import React, { useState } from 'react'
+import { Button, DataTable, Column, InputText } from 'shared/lib'
 import { Loading } from 'shared/ui'
 import { DeletePostButton } from 'features/post-delete'
 import { usePosts } from '../model/usePosts'
@@ -33,6 +33,7 @@ function PostsList({
   renderPost 
 }: PostsListProps) {
   const { posts, isLoading, error, refetch } = usePosts()
+  const [globalFilter, setGlobalFilter] = useState<string>('')
 
   if (isLoading) {
     return (
@@ -171,6 +172,19 @@ function PostsList({
         )}
       </div>
 
+      {/* Buscador Global */}
+      <div className="mb-4">
+        <div className="p-input-icon-left w-full md:w-20rem">
+          <i className="pi pi-search" />
+          <InputText
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Buscar posts..."
+            className="w-full"
+          />
+        </div>
+      </div>
+
       {posts.length === 0 && !isLoading ? (
         <div className="text-center p-6">
           <i className="pi pi-inbox text-4xl text-400 mb-3"></i>
@@ -191,6 +205,8 @@ function PostsList({
           emptyMessage="No se encontraron posts"
           loading={isLoading}
           tableStyle={{ minWidth: '50rem' }}
+          globalFilter={globalFilter}
+          globalFilterFields={['title', 'body', 'userId']}
         >
           <Column 
             field="id" 
