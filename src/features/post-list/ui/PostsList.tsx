@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button } from 'shared/lib'
+import { Button, DataTable, Column } from 'shared/lib'
 import { Loading } from 'shared/ui'
+import { DeletePostButton } from 'features/post-delete'
 import { usePosts } from '../model/usePosts'
+import type { Post } from 'entities/post'
 
 interface PostsListProps {
   onCreatePost?: () => void
@@ -58,6 +60,101 @@ function PostsList({
     )
   }
 
+  // Template para la columna ID
+  const idBodyTemplate = (rowData: Post) => {
+    return (
+      <div className="flex align-items-center">
+        <div className="bg-blue-100 border-round px-2 py-1">
+          <span className="text-sm font-semibold text-blue-800">#{rowData.id}</span>
+        </div>
+      </div>
+    )
+  }
+
+  // Template para la columna título
+  const titleBodyTemplate = (rowData: Post) => {
+    return (
+      <div className="flex flex-column">
+        <span className="font-semibold text-900 line-height-3">
+          {rowData.title}
+        </span>
+      </div>
+    )
+  }
+
+  // Template para la columna contenido con truncado
+  const contentBodyTemplate = (rowData: Post) => {
+    const truncatedContent = rowData.body.length > 100 
+      ? `${rowData.body.substring(0, 100)}...` 
+      : rowData.body
+    
+    return (
+      <div className="flex flex-column">
+        <span className="text-600 line-height-3">
+          {truncatedContent}
+        </span>
+        {rowData.body.length > 100 && (
+          <small className="text-400 mt-1">
+            +{rowData.body.length - 100} caracteres más
+          </small>
+        )}
+      </div>
+    )
+  }
+
+  // Template para la columna autor
+  const authorBodyTemplate = (rowData: Post) => {
+    return (
+      <div className="flex align-items-center gap-2">
+        <i className="pi pi-user text-400"></i>
+        <span className="text-600">Usuario {rowData.userId}</span>
+      </div>
+    )
+  }
+
+  // Template para la columna fecha (mock)
+  const dateBodyTemplate = (rowData: Post) => {
+    return (
+      <div className="flex align-items-center gap-2">
+        <i className="pi pi-calendar text-400"></i>
+        <span className="text-600 text-sm">JSONPlaceholder</span>
+      </div>
+    )
+  }
+
+  // Template para la columna de acciones
+  const actionsBodyTemplate = (rowData: Post) => {
+    return (
+      <div className="flex gap-2">
+        {onEditPost && (
+          <Button
+            icon="pi pi-pencil"
+            tooltip="Editar"
+            tooltipOptions={{ position: 'top' }}
+            onClick={() => onEditPost(rowData.id)}
+            className="p-button-rounded p-button-text p-button-warning"
+            size="small"
+          />
+        )}
+        {onDeletePost && (
+          <DeletePostButton
+            postId={rowData.id}
+            postTitle={rowData.title}
+            onSuccess={onDeletePost}
+            className="p-button-rounded p-button-text p-button-danger"
+            size="small"
+          />
+        )}
+      </div>
+    )
+  }
+
+  // Template del paginador personalizado - string válido para PrimeReact
+  const paginatorTemplate = 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown'
+  
+  // Template para el reporte actual de página - debe ser string
+  const currentPageReportTemplate = 'Mostrando {first} a {last} de {totalRecords} posts'
+
   return (
     <div>
       <div className="flex justify-content-between align-items-center mb-4">
@@ -74,56 +171,66 @@ function PostsList({
         )}
       </div>
 
-      <div className="grid">
-        {posts.map((post) => (
-          <div key={post.id} className="col-12">
-            {renderPost ? renderPost(post) : (
-              <div className="border-1 border-200 border-round p-4 mb-3 hover:shadow-2 transition-all transition-duration-200">
-                <div className="flex justify-content-between align-items-start mb-3">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-900 mb-2 line-height-3">
-                      {post.title}
-                    </h3>
-                    <p className="text-600 line-height-3 mb-3">
-                      {post.body}
-                    </p>
-                    <div className="flex align-items-center gap-2">
-                      <i className="pi pi-user text-400"></i>
-                      <span className="text-sm text-500">Usuario #{post.userId}</span>
-                      <i className="pi pi-hashtag text-400 ml-3"></i>
-                      <span className="text-sm text-500">Post #{post.id}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 ml-3">
-                    {onEditPost && (
-                      <Button
-                        icon="pi pi-pencil"
-                        tooltip="Editar"
-                        onClick={() => onEditPost(post.id)}
-                        className="p-button-rounded p-button-text p-button-warning"
-                      />
-                    )}
-                    {onDeletePost && (
-                      <Button
-                        icon="pi pi-trash"
-                        tooltip="Eliminar"
-                        onClick={() => onDeletePost(post.id)}
-                        className="p-button-rounded p-button-text p-button-danger"
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {posts.length === 0 && !isLoading && (
+      {posts.length === 0 && !isLoading ? (
         <div className="text-center p-6">
           <i className="pi pi-inbox text-4xl text-400 mb-3"></i>
           <p className="text-600 text-lg">No hay posts disponibles</p>
         </div>
+      ) : (
+        <DataTable
+          value={posts}
+          paginator={true}
+          rows={10}
+          rowsPerPageOptions={[5, 10, 25, 50]}
+          paginatorTemplate={paginatorTemplate}
+          currentPageReportTemplate={currentPageReportTemplate}
+          className="p-datatable-sm"
+          stripedRows={true}
+          responsiveLayout="stack"
+          breakpoint="768px"
+          emptyMessage="No se encontraron posts"
+          loading={isLoading}
+          tableStyle={{ minWidth: '50rem' }}
+        >
+          <Column 
+            field="id" 
+            header="ID" 
+            body={idBodyTemplate}
+            sortable 
+            style={{ width: '80px', minWidth: '80px' }}
+          />
+          <Column 
+            field="title" 
+            header="Título" 
+            body={titleBodyTemplate}
+            sortable 
+            style={{ minWidth: '200px' }}
+          />
+          <Column 
+            field="body" 
+            header="Contenido" 
+            body={contentBodyTemplate}
+            style={{ minWidth: '300px' }}
+          />
+          <Column 
+            field="userId" 
+            header="Autor" 
+            body={authorBodyTemplate}
+            sortable 
+            style={{ width: '120px', minWidth: '120px' }}
+          />
+          <Column 
+            header="Fecha" 
+            body={dateBodyTemplate}
+            style={{ width: '140px', minWidth: '140px' }}
+          />
+          <Column 
+            header="Acciones" 
+            body={actionsBodyTemplate}
+            exportable={false}
+            style={{ width: '120px', minWidth: '120px' }}
+          />
+        </DataTable>
       )}
     </div>
   )
