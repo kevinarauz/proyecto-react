@@ -10,7 +10,6 @@ interface PostsListProps {
   onCreatePost?: () => void
   onEditPost?: (postId: number) => void
   onDeletePost?: (postId: number) => void
-  renderPost?: (post: unknown) => React.ReactNode
 }
 
 // Función de comparación personalizada para optimizar re-renders
@@ -22,16 +21,14 @@ const arePostsListPropsEqual = (
   return (
     prevProps.onCreatePost === nextProps.onCreatePost &&
     prevProps.onEditPost === nextProps.onEditPost &&
-    prevProps.onDeletePost === nextProps.onDeletePost &&
-    prevProps.renderPost === nextProps.renderPost
+    prevProps.onDeletePost === nextProps.onDeletePost
   )
 }
 
 function PostsList({ 
   onCreatePost, 
   onEditPost, 
-  onDeletePost,
-  renderPost 
+  onDeletePost
 }: PostsListProps) {
   const { posts, isLoading, error, refetch } = usePosts()
   const [globalFilter, setGlobalFilter] = useState<string>('')
@@ -124,7 +121,7 @@ function PostsList({
   }
 
   // Template para la columna fecha (mock)
-  const dateBodyTemplate = (rowData: Post) => {
+  const dateBodyTemplate = () => {
     return (
       <div className="flex align-items-center gap-2">
         <div className="bg-orange-50 border-round p-1">
@@ -202,16 +199,15 @@ function PostsList({
           {/* Buscador Mejorado */}
           <div className={`flex-1 md:max-w-20rem ${styles['search-input-container']}`}>
             <span className="p-input-icon-left w-full">
-              <i className="pi pi-search text-400"></i>
+              <i className="pi pi-search text-400" style={{ left: '1rem' }}></i>
               <InputText
+                id="search-posts"
+                name="searchPosts"
                 value={globalFilter}
                 onChange={(e) => setGlobalFilter(e.target.value)}
                 placeholder="Buscar en posts..."
-                className={`w-full pr-3 py-2 border-1 border-300 border-round-md hover:border-primary-300 focus:border-primary-500 focus:shadow-0 ${styles['search-input-enhanced']}`}
-                style={{
-                  paddingLeft: '3rem',
-                  transition: 'all 0.2s ease'
-                }}
+                aria-label="Buscar posts por título, contenido o autor"
+                className={`w-full ${styles['search-input-enhanced']}`}
               />
             </span>
           </div>
@@ -223,11 +219,7 @@ function PostsList({
                 label="Crear Post"
                 icon="pi pi-plus"
                 onClick={onCreatePost}
-                className={`p-button-primary font-semibold px-4 py-2 ${styles['action-button']}`}
-                style={{
-                  borderRadius: '8px',
-                  transition: 'all 0.2s ease'
-                }}
+                className={`p-button-primary font-semibold ${styles['action-button']}`}
               />
             )}
           </div>

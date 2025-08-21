@@ -3,7 +3,6 @@ import { Card } from 'shared/lib'
 import { PostsList } from 'features/post-list'
 import { CreatePostForm } from 'features/post-create'
 import { EditPostForm } from 'features/post-edit'
-import { PostCard } from 'widgets/PostCard'
 import type { Post } from 'entities/post'
 
 type ViewMode = 'list' | 'create' | 'edit'
@@ -46,14 +45,6 @@ function PostsPage() {
     setEditingPostId(null)
   }
 
-  const renderPost = (post: Post) => (
-    <PostCard
-      post={post}
-      onEdit={handleEditPost}
-      onDelete={handleDeletePost}
-      className="mb-3"
-    />
-  )
 
   // Vista para crear post
   if (viewMode === 'create') {
@@ -120,7 +111,6 @@ function PostsPage() {
             onCreatePost={handleCreatePost}
             onEditPost={handleEditPost}
             onDeletePost={handleDeletePost}
-            renderPost={renderPost}
           />
         </Card>
       </div>

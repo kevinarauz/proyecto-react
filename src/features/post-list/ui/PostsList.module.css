@@ -17,8 +17,10 @@
 }
 
 .search-input-enhanced {
-  transition: var(--transition-base);
+  padding: 0.5rem 0.75rem 0.5rem 3rem;
   border: 1px solid var(--surface-300);
+  border-radius: 6px;
+  transition: var(--transition-base);
 }
 
 .search-input-enhanced:hover {
@@ -34,8 +36,9 @@
 
 /* Animaciones para los botones */
 .action-button {
-  transition: var(--transition-base);
+  padding: 0.5rem 1rem;
   border-radius: 8px;
+  transition: var(--transition-base);
 }
 
 .action-button:hover {
