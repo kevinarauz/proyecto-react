@@ -7,6 +7,7 @@
 | **arq** | 2.0.0 | Arquitecto de Software | Architecture, ADRs, Technical Constraints | ✅ Enhanced |
 | **front** | 2.0.0 | Diseñador Frontend | UI/UX, Design System, Accessibility | ✅ Enhanced |
 | **qa** | 2.0.0 | QA Engineer | Testing Strategy, Quality Gates | ✅ Enhanced |
+| **backend** | 1.0.0 | Backend Engineer | API Design, Data Modeling, Services | 🆕 New |
 | **coord** | 1.0.0 | Technical Lead | Workflow Orchestration, Conflict Resolution | 🆕 New |
 | **devops** | 1.0.0 | Platform Engineer | CI/CD, Infrastructure, Monitoring | 🆕 New |
 | **validator** | 1.0.0 | Integration Validator | Cross-Agent Validation, Quality Gates | 🆕 New |
@@ -24,6 +25,7 @@ graph TB
         ARQ[Architecture Agent]
         FRONT[Frontend Agent] 
         QA[QA Agent]
+        BACKEND[Backend Agent]
         DEVOPS[DevOps Agent]
     end
     
@@ -36,11 +38,13 @@ graph TB
     COORD --> ARQ
     COORD --> FRONT
     COORD --> QA
+    COORD --> BACKEND
     COORD --> DEVOPS
     
     ARQ --> VAL
     FRONT --> VAL
     QA --> VAL
+    BACKEND --> VAL
     DEVOPS --> VAL
     
     VAL --> COORD
@@ -48,6 +52,7 @@ graph TB
     CONTRACTS --> ARQ
     CONTRACTS --> FRONT
     CONTRACTS --> QA
+    CONTRACTS --> BACKEND
     CONTRACTS --> DEVOPS
     
     WORKFLOWS --> COORD
@@ -62,6 +67,7 @@ src/.claude/agents/
 ├── arq.md                   # Architecture Agent (Enhanced v2.0)
 ├── front.md                 # Frontend Agent (Enhanced v2.0)  
 ├── qa.md                    # QA Agent (Enhanced v2.0)
+├── backend.md               # Backend Agent (New v1.0)
 ├── coord.md                 # Coordinator Agent (New)
 ├── devops.md                # DevOps Agent (New)
 ├── validator.md             # Validator Agent (New)

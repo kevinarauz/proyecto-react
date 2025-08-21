@@ -66,7 +66,7 @@ const arquiContract: AgentContract = {
   metadata: {
     name: "arq",
     version: "2.0.0",
-    lastUpdated: "2025-08-20",
+    lastUpdated: "2025-08-21",
     model: "sonnet"
   },
   inputs: {
@@ -85,21 +85,21 @@ const arquiContract: AgentContract = {
         name: "Architecture Decision Records", 
         type: "ADR",
         format: "structured-markdown",
-        consumers: ["front", "qa", "devops"],
+        consumers: ["front", "backend", "qa", "devops"],
         updateFrequency: "milestone"
       },
       {
         name: "System Diagrams",
         type: "diagram",
         format: "mermaid",
-        consumers: ["front", "devops", "validator"],
+        consumers: ["front", "backend", "devops", "validator"],
         updateFrequency: "on-demand"
       },
       {
         name: "Technical Constraints",
         type: "constraints",
         format: "checklist",
-        consumers: ["front", "qa", "devops"],
+        consumers: ["front", "backend", "qa", "devops"],
         updateFrequency: "milestone"
       }
     ],
@@ -110,7 +110,7 @@ const arquiContract: AgentContract = {
     ]
   },
   handoffs: {
-    to: ["front", "qa", "devops"],
+    to: ["front", "backend", "qa", "devops"],
     format: {
       structure: "summary-details",
       sections: ["Executive Summary", "Technical Constraints", "Implementation Roadmap"],
@@ -195,6 +195,83 @@ const frontContract: AgentContract = {
 }
 ```
 
+### 🛠️ Backend Agent (backend)
+
+```typescript
+const backendContract: AgentContract = {
+  metadata: {
+    name: "backend",
+    version: "1.0.0",
+    lastUpdated: "2025-08-21",
+    model: "sonnet"
+  },
+  inputs: {
+    required: [
+      { name: "technical-constraints", type: "architecture", format: "ADR", source: "arq" },
+      { name: "api-requirements", type: "requirements", format: "user-story", source: "stakeholder" }
+    ],
+    optional: [
+      { name: "existing-apis", type: "api-spec", format: "openapi", source: "filesystem" },
+      { name: "database-schema", type: "data-model", format: "sql", source: "filesystem" }
+    ],
+    dependencies: ["arq"]
+  },
+  outputs: {
+    deliverables: [
+      {
+        name: "API Specifications",
+        type: "api-design",
+        format: "openapi-spec",
+        consumers: ["front", "qa", "devops"],
+        updateFrequency: "continuous"
+      },
+      {
+        name: "Data Model Design",
+        type: "database-schema",
+        format: "entity-diagram",
+        consumers: ["devops", "qa", "validator"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "Service Architecture",
+        type: "service-design",
+        format: "architecture-diagram",
+        consumers: ["arq", "devops", "validator"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "Authentication Strategy",
+        type: "auth-design",
+        format: "security-spec",
+        consumers: ["front", "qa", "devops"],
+        updateFrequency: "milestone"
+      }
+    ],
+    constraints: [
+      "API versioning strategy defined",
+      "Security requirements implemented",
+      "Performance benchmarks established"
+    ]
+  },
+  handoffs: {
+    to: ["front", "qa", "devops"],
+    format: {
+      structure: "api-first",
+      sections: ["API Contracts", "Data Models", "Security Specifications", "Performance Requirements"],
+      validationCriteria: ["API contracts testable", "Data integrity ensured", "Security validated"]
+    },
+    timing: "sequential"
+  },
+  triggers: [
+    "API design requirements",
+    "Database modeling needs",
+    "Authentication implementation",
+    "Performance optimization",
+    "Integration with external services"
+  ]
+}
+```
+
 ### 🧪 QA Agent (qa)
 
 ```typescript
@@ -265,7 +342,63 @@ const qaContract: AgentContract = {
 
 ## Handoff Templates
 
-### 🔄 arq → front Handoff
+### 🔄 arq → backend Handoff
+```markdown
+## Architecture → Backend Handoff
+
+### System Architecture Summary
+- **Service Architecture**: [monolith/microservices/serverless approach]
+- **Data Architecture**: [database strategy, data flow patterns]
+- **Integration Patterns**: [API patterns, event-driven, messaging]
+- **Security Architecture**: [authentication strategy, authorization patterns]
+
+### Technical Constraints
+- **Performance Requirements**: [response times, throughput, scalability needs]
+- **Security Requirements**: [encryption, compliance, audit requirements]
+- **Integration Constraints**: [external APIs, legacy systems, protocols]
+- **Technology Constraints**: [approved technologies, frameworks, databases]
+
+### Implementation Guidelines
+- **API Design Standards**: [REST principles, naming conventions, error handling]
+- **Data Management**: [consistency requirements, transaction patterns]
+- **Service Communication**: [synchronous vs asynchronous patterns]
+
+### Validation Checklist
+- [ ] Service architecture aligns with system constraints
+- [ ] API design follows architectural patterns
+- [ ] Security requirements technically feasible
+- [ ] Performance requirements achievable with proposed design
+```
+
+### 🔄 backend → front Handoff
+```markdown
+## Backend → Frontend Handoff
+
+### API Contracts Summary
+- **Endpoint Specifications**: [REST/GraphQL endpoints with request/response schemas]
+- **Authentication Flow**: [login/logout, token refresh, session management]
+- **Error Handling**: [error codes, error messages, retry strategies]
+- **Data Formats**: [JSON schemas, date formats, validation rules]
+
+### Integration Requirements
+- **API Base URLs**: [development, staging, production endpoints]
+- **Authentication Methods**: [JWT, OAuth, API keys, session cookies]
+- **Request Headers**: [required headers, content-type, authorization]
+- **Response Structures**: [success/error patterns, pagination, filtering]
+
+### Frontend Implications
+- **State Management**: [data fetching patterns, cache strategies]
+- **Error Handling**: [user-friendly error messages, retry mechanisms]
+- **Loading States**: [progress indicators, skeleton screens]
+
+### Validation Checklist
+- [ ] All frontend data needs covered by APIs
+- [ ] Authentication flow implementable in React
+- [ ] Error handling patterns user-friendly
+- [ ] API responses optimized for frontend consumption
+```
+
+### 🔄 backend → qa Handoff
 ```markdown
 ## Architecture → Frontend Handoff
 
