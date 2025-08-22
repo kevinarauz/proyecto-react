@@ -4,6 +4,7 @@
 
 | Agent | Version | Role | Primary Focus | Status |
 |-------|---------|------|---------------|--------|
+| **product** | 1.0.0 | Product Owner | User Stories, Requirements, Prioritization | 🆕 New |
 | **arq** | 2.0.0 | Arquitecto de Software | Architecture, ADRs, Technical Constraints | ✅ Enhanced |
 | **front** | 2.0.0 | Diseñador Frontend | UI/UX, Design System, Accessibility | ✅ Enhanced |
 | **qa** | 2.0.0 | QA Engineer | Testing Strategy, Quality Gates | ✅ Enhanced |
@@ -22,6 +23,7 @@ graph TB
     end
     
     subgraph "Specialized Agents"
+        PRODUCT[Product Agent]
         ARQ[Architecture Agent]
         FRONT[Frontend Agent] 
         QA[QA Agent]
@@ -35,12 +37,14 @@ graph TB
         HANDOFFS[Handoff Templates]
     end
     
+    COORD --> PRODUCT
     COORD --> ARQ
     COORD --> FRONT
     COORD --> QA
     COORD --> BACKEND
     COORD --> DEVOPS
     
+    PRODUCT --> VAL
     ARQ --> VAL
     FRONT --> VAL
     QA --> VAL
@@ -64,6 +68,7 @@ graph TB
 ```
 src/.claude/agents/
 ├── README.md                 # This index file
+├── product.md               # Product Owner Agent (New v1.0)
 ├── arq.md                   # Architecture Agent (Enhanced v2.0)
 ├── front.md                 # Frontend Agent (Enhanced v2.0)  
 ├── qa.md                    # QA Agent (Enhanced v2.0)
@@ -78,34 +83,40 @@ src/.claude/agents/
 
 ## 🚀 Quick Start Guide
 
-### 1. Architecture Analysis
+### 1. Product Requirements Definition
+```bash
+# Use product agent for user stories and requirements
+@product: define user stories for the new blog commenting system
+```
+
+### 2. Architecture Analysis
 ```bash
 # Use arq agent for architectural decisions
 @arq: analyze the current React project architecture
 ```
 
-### 2. Frontend Design Review  
+### 3. Frontend Design Review  
 ```bash
 # Use front agent for UI/UX analysis
 @front: review the current design system and propose improvements
 ```
 
-### 3. Quality Assessment
+### 4. Quality Assessment
 ```bash
 # Use qa agent for testing strategy
 @qa: create a comprehensive test plan for the current features
 ```
 
-### 4. Workflow Orchestration
+### 5. Workflow Orchestration
 ```bash
 # Use coord agent to manage multi-agent workflows
 @coord: orchestrate a workflow for implementing new authentication system
 ```
 
-### 5. Cross-Validation
+### 6. Cross-Validation
 ```bash
 # Use validator agent to check consistency
-@validator: validate outputs from arq, front, and qa agents
+@validator: validate outputs from product, arq, front, and qa agents
 ```
 
 ## 🔧 Configuration
@@ -114,7 +125,8 @@ src/.claude/agents/
 
 | Use Case | Recommended Agent | Secondary Agents |
 |----------|-------------------|------------------|
-| **New Feature Planning** | coord → arq → front → qa | devops, validator |
+| **Product Requirements** | product | coord (prioritization) |
+| **New Feature Planning** | coord → product → arq → front → qa | devops, validator |
 | **Architecture Review** | arq | validator |
 | **UI/UX Improvements** | front | arq (constraints), qa (testing) |
 | **Testing Strategy** | qa | arq (requirements), front (UI specs) |
@@ -235,6 +247,6 @@ For questions about the multi-agent system:
 4. Use coord agent for workflow guidance
 5. Use validator agent for quality assurance
 
-**System Version**: 2.0.0  
-**Last Updated**: 2025-08-20  
+**System Version**: 2.1.0  
+**Last Updated**: 2025-08-22  
 **Maintained by**: Multi-Agent Architecture Team

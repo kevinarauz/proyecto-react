@@ -59,6 +59,92 @@ interface HandoffFormat {
 
 ## Contract Definitions by Agent
 
+### 📋 Product Owner Agent (product)
+
+```typescript
+const productContract: AgentContract = {
+  metadata: {
+    name: "product",
+    version: "1.0.0",
+    lastUpdated: "2025-08-22",
+    model: "sonnet"
+  },
+  inputs: {
+    required: [
+      { name: "business-requirements", type: "requirements", format: "markdown", source: "stakeholder" },
+      { name: "user-research", type: "requirements", format: "user-story", source: "stakeholder" }
+    ],
+    optional: [
+      { name: "market-analysis", type: "requirements", format: "markdown", source: "external" },
+      { name: "competitive-analysis", type: "requirements", format: "markdown", source: "external" },
+      { name: "existing-backlog", type: "requirements", format: "user-story", source: "documentation" }
+    ],
+    dependencies: []
+  },
+  outputs: {
+    deliverables: [
+      { 
+        name: "User Stories", 
+        type: "user-story",
+        format: "structured-markdown",
+        consumers: ["arq", "front", "qa", "backend"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Acceptance Criteria",
+        type: "test-plan",
+        format: "given-when-then",
+        consumers: ["qa", "front", "backend"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Priority Framework",
+        type: "requirements",
+        format: "scored-list",
+        consumers: ["coord", "arq"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "Epic Definitions",
+        type: "requirements",
+        format: "structured-markdown",
+        consumers: ["coord", "arq", "backend"],
+        updateFrequency: "milestone"
+      }
+    ],
+    constraints: [
+      "All user stories follow As/I want/So that format",
+      "Acceptance criteria are testable and specific",
+      "Priority scores have clear business justification",
+      "Success metrics are defined and measurable"
+    ]
+  },
+  handoffs: {
+    to: ["arq", "coord"],
+    format: {
+      structure: "business-context-stories-criteria",
+      sections: ["Business Context", "User Stories", "Acceptance Criteria", "Priority Assessment"],
+      validationCriteria: ["All stories have clear business value", "Acceptance criteria are testable"]
+    },
+    timing: "sequential"
+  },
+  triggers: [
+    "New feature requests from stakeholders",
+    "Requirements clarification needed",
+    "Backlog prioritization required",
+    "Product discovery sessions"
+  ],
+  sla: {
+    responseTime: "4 hours for user stories, 1 day for epics",
+    quality: [
+      { metric: "Story completeness", target: "100% of INVEST criteria met" },
+      { metric: "Acceptance criteria clarity", target: "100% testable criteria" },
+      { metric: "Business value alignment", target: "All stories have clear ROI" }
+    ]
+  }
+}
+```
+
 ### 🏗️ Architecture Agent (arq)
 
 ```typescript
@@ -341,6 +427,64 @@ const qaContract: AgentContract = {
 ```
 
 ## Handoff Templates
+
+### 🔄 product → arq Handoff
+```markdown
+## Product → Architecture Handoff
+
+### Business Context Summary
+- **Epic Overview**: [high-level business goal and user value]
+- **Success Metrics**: [KPIs, conversion rates, user satisfaction targets]
+- **Business Constraints**: [timeline, budget, compliance requirements]
+- **User Personas**: [primary and secondary user types affected]
+
+### Functional Requirements
+- **User Stories**: [complete set of user stories with business justification]
+- **Acceptance Criteria**: [testable criteria in Given/When/Then format]
+- **User Flows**: [critical paths users will take through the system]
+- **Data Requirements**: [what data needs to be stored/processed/displayed]
+
+### Non-Functional Requirements
+- **Performance Expectations**: [user experience requirements, load expectations]
+- **Security Requirements**: [data protection, privacy, compliance needs]
+- **Scalability Needs**: [growth projections, concurrent users]
+- **Integration Requirements**: [external systems, third-party APIs]
+
+### Validation Checklist
+- [ ] All user stories have clear business value
+- [ ] Acceptance criteria are testable and specific
+- [ ] Non-functional requirements defined with measurable targets
+- [ ] User flows cover all major scenarios
+- [ ] Success metrics are trackable and achievable
+```
+
+### 🔄 product → coord Handoff
+```markdown
+## Product → Coordinator Handoff
+
+### Prioritization Summary
+- **Epic Priority Score**: [MoSCoW classification with RICE scores]
+- **Business Justification**: [ROI analysis, strategic alignment]
+- **Timeline Constraints**: [hard deadlines, market windows]
+- **Resource Implications**: [estimated effort, team allocation needs]
+
+### Stakeholder Context
+- **Key Stakeholders**: [decision makers, approvers, impacted teams]
+- **Dependencies**: [external dependencies, prerequisite features]
+- **Risk Assessment**: [business risks, technical risks, mitigation strategies]
+- **Change Management**: [user training needs, rollout strategy]
+
+### Implementation Strategy
+- **Phasing Recommendations**: [MVP vs full feature, incremental delivery]
+- **Feature Flags**: [gradual rollout strategy, A/B testing opportunities]
+- **Rollback Plan**: [what to do if feature doesn't meet success criteria]
+
+### Validation Checklist
+- [ ] Priority scores justified with business impact
+- [ ] All stakeholders identified and aligned
+- [ ] Dependencies mapped and addressed
+- [ ] Risk mitigation strategies defined
+```
 
 ### 🔄 arq → backend Handoff
 ```markdown

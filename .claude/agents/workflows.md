@@ -3,11 +3,12 @@
 ## Workflow Definitions
 
 ### 🔄 Sequential Workflow
-Para cambios arquitectónicos mayores que requieren dependencies estrictas:
+Para cambios que requieren definición clara de producto y dependencies estrictas:
 
 ```mermaid
 graph TD
-    START[Requirements] --> ARQ[Architecture Agent]
+    START[Stakeholder Request] --> PRODUCT[Product Agent]
+    PRODUCT --> ARQ[Architecture Agent]
     ARQ --> FRONT[Frontend Agent] 
     FRONT --> QA[QA Agent]
     QA --> DEVOPS[DevOps Agent]
@@ -17,12 +18,13 @@ graph TD
 ```
 
 **Trigger Conditions:**
-- New feature with architectural impact
-- Technology stack changes
-- Major refactoring initiatives
-- Breaking changes
+- New feature requests from stakeholders
+- Major product initiatives
+- User experience improvements
+- Business requirement changes
 
 **Gates:**
+- PRODUCT → ARQ: User stories and acceptance criteria defined
 - ARQ → FRONT: Technical constraints defined
 - FRONT → QA: UI specifications complete
 - QA → DEVOPS: Quality gates established
@@ -34,7 +36,8 @@ Para features independientes sin dependencies críticas:
 
 ```mermaid
 graph TD
-    START[Requirements] --> SPLIT{Distribute}
+    START[Stakeholder Request] --> PRODUCT[Product Agent]
+    PRODUCT --> SPLIT{Distribute}
     
     SPLIT --> ARQ[Architecture Agent]
     SPLIT --> FRONT[Frontend Agent]
@@ -66,7 +69,8 @@ Para development continuo con feedback loops:
 
 ```mermaid
 graph TD
-    START[Requirements] --> ASSESS[Initial Assessment]
+    START[Stakeholder Request] --> PRODUCT[Product Agent]
+    PRODUCT --> ASSESS[Initial Assessment]
     
     ASSESS --> ARQ[Architecture Agent]
     ARQ --> VAL1[Quick Validation]
@@ -101,6 +105,7 @@ graph TD
 
 | Scenario | Workflow Type | Trigger Agent | Critical Path |
 |----------|---------------|---------------|---------------|
+| **New Feature Request** | Sequential | product | product → arq → front → qa → devops |
 | **New Architecture** | Sequential | arq | arq → front → qa → devops |
 | **UI Redesign** | Parallel | front | front \|\| qa, then devops |
 | **API Changes** | Sequential | arq | arq → qa → devops |
@@ -108,13 +113,14 @@ graph TD
 | **Security Vulnerability** | Sequential | arq | arq → devops → qa |
 | **Bug Fix** | Parallel | qa | qa \|\| front, then devops |
 | **Infrastructure Change** | Sequential | devops | devops → arq → qa |
-| **Feature Enhancement** | Iterative | coord | coord → arq ↔ front ↔ qa |
+| **Feature Enhancement** | Iterative | coord | coord → product ↔ arq ↔ front ↔ qa |
 
 ### 📋 Quality Gates by Workflow
 
 #### Sequential Gates
-1. **Architecture Gate**: ADRs complete, constraints defined
-2. **Design Gate**: UI specs aligned with architecture  
+1. **Product Gate**: User stories complete, acceptance criteria defined
+2. **Architecture Gate**: ADRs complete, constraints defined
+3. **Design Gate**: UI specs aligned with architecture  
 3. **Quality Gate**: Test strategy covers all requirements
 4. **Infrastructure Gate**: Deployment strategy validated
 5. **Integration Gate**: All outputs coherent and implementable
