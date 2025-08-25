@@ -166,6 +166,7 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 | **@validator** | Integration Validator | `@validator: validate consistency between outputs` |
 | **@workflow** | Workflow Intelligence | `@workflow: optimize execution sequence for [changes]` |
 | **@ai-resolver** | AI Conflict Resolution | `@ai-resolver: resolve conflicts between [agents]` |
+| **@performance** | Performance Engineer | `@performance: optimize performance for [system/feature]` |
 
 ### Quick Start con Agentes
 
@@ -176,6 +177,7 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 # 2. Seguir roadmap generado
 @arq: design architecture for Excel generation
 @front: design UI for export functionality
+@performance: analyze performance impact of Excel generation
 @qa: create testing strategy for Excel export
 @devops: setup CI/CD for new feature
 
@@ -196,7 +198,8 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 ├── coord.md                # Coordinator Agent
 ├── validator.md            # Validator Agent
 ├── workflow.md             # Workflow Intelligence Agent
-└── ai-resolver.md          # AI Conflict Resolution Agent
+├── ai-resolver.md          # AI Conflict Resolution Agent
+└── performance.md          # Performance Engineering Agent
 
 Documentacion Agentes/       # 📚 Documentación del sistema
 ├── README.md               # System overview
@@ -214,6 +217,7 @@ Documentacion Agentes/       # 📚 Documentación del sistema
 - **🔄 Orquestación Automática**: Coordinación inteligente entre agentes
 - **✅ Validación Cruzada**: Verificación de consistencia entre outputs
 - **📊 Quality Gates**: Métricas y umbrales de calidad automatizados
+- **⚡ Performance Engineering**: Optimización y monitoreo de rendimiento end-to-end
 
 ### 💻 Funcionalidades Excel Integration
 
@@ -232,7 +236,7 @@ await excelGenerator.generateDocument(documentData);
 - **Versiones compatibles**: Las dependencias están configuradas para Node.js v18
 - **FSD Template**: Este proyecto sirve como template para futuros proyectos escalables
 - **TypeScript**: Path mappings configurados para IntelliSense completo
-- **Multi-Agent System**: Sistema nivel enterprise con 10 agentes especializados
+- **Multi-Agent System**: Sistema nivel enterprise con 11 agentes especializados
 - **Excel Generation**: Sistema completo para generación de documentos Excel
 - **Credenciales mock**: Solo para desarrollo - cambiar en producción
 - **localStorage**: Persistencia básica - considerar tokens JWT en producción
