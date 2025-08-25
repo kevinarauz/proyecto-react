@@ -12,11 +12,18 @@
 | **coord** | 1.0.0 | Technical Lead | Workflow Orchestration, Conflict Resolution | 🆕 New |
 | **devops** | 1.0.0 | Platform Engineer | CI/CD, Infrastructure, Monitoring | 🆕 New |
 | **validator** | 1.0.0 | Integration Validator | Cross-Agent Validation, Quality Gates | 🆕 New |
+| **workflow** | 1.0.0 | Workflow Intelligence | Auto-detect Optimal Workflow Type | 🚀 Latest |
+| **ai-resolver** | 1.0.0 | AI Conflict Resolution | ML-Powered Conflict Resolution | 🚀 Latest |
 
 ## 🔄 System Architecture
 
 ```mermaid
 graph TB
+    subgraph "Intelligence Layer"
+        WORKFLOW[Workflow Agent]
+        AIRESOLVER[AI-Resolver Agent]
+    end
+    
     subgraph "Coordination Layer"
         COORD[Coordinator Agent]
         VAL[Validator Agent]
@@ -37,6 +44,11 @@ graph TB
         HANDOFFS[Handoff Templates]
     end
     
+    WORKFLOW --> COORD
+    AIRESOLVER --> COORD
+    COORD --> WORKFLOW
+    COORD --> AIRESOLVER
+    
     COORD --> PRODUCT
     COORD --> ARQ
     COORD --> FRONT
@@ -52,6 +64,7 @@ graph TB
     DEVOPS --> VAL
     
     VAL --> COORD
+    VAL --> AIRESOLVER
     
     CONTRACTS --> ARQ
     CONTRACTS --> FRONT
@@ -60,6 +73,7 @@ graph TB
     CONTRACTS --> DEVOPS
     
     WORKFLOWS --> COORD
+    WORKFLOWS --> WORKFLOW
     HANDOFFS --> VAL
 ```
 
@@ -76,6 +90,8 @@ src/.claude/agents/
 ├── coord.md                 # Coordinator Agent (New)
 ├── devops.md                # DevOps Agent (New)
 ├── validator.md             # Validator Agent (New)
+├── workflow.md              # Workflow Intelligence Agent (Latest v1.0)
+├── ai-resolver.md           # AI Conflict Resolution Agent (Latest v1.0)
 ├── contracts.md             # Interface Contracts
 ├── workflows.md             # Workflow Definitions
 └── implementation-guide.md  # Usage Guidelines
@@ -117,6 +133,18 @@ src/.claude/agents/
 ```bash
 # Use validator agent to check consistency
 @validator: validate outputs from product, arq, front, and qa agents
+```
+
+### 7. Intelligent Workflow Detection
+```bash
+# Use workflow agent to auto-detect optimal workflow type
+@workflow: analyze change impact and recommend workflow strategy
+```
+
+### 8. AI-Powered Conflict Resolution
+```bash
+# Use ai-resolver for complex conflict resolution
+@ai-resolver: resolve conflicts between architecture and UX recommendations
 ```
 
 ## 🔧 Configuration
@@ -218,23 +246,29 @@ Each agent-to-agent handoff follows standardized templates defined in `contracts
 
 ## 🔮 Roadmap
 
-### Phase 1 ✅ (Current)
+### Phase 1 ✅ (Completed)
 - Core agents enhanced (arq, front, qa)
 - Coordination and validation agents added
 - Interface contracts defined
 - Basic workflow system implemented
 
-### Phase 2 🔄 (In Progress)
-- Performance and security agents
+### Phase 2 ✅ (Completed)
+- Intelligent workflow detection agent
+- AI-powered conflict resolution agent
+- ML-based pattern analysis and optimization
 - Advanced workflow automation
-- Metrics and monitoring implementation
-- Integration with external tools
 
-### Phase 3 📅 (Planned)
-- AI-powered conflict resolution
+### Phase 3 🔄 (In Progress)
+- Performance and security agents
+- Real-time dashboard with agent metrics
 - Predictive quality assessment
-- Automated workflow optimization
 - Advanced reporting and analytics
+
+### Phase 4 📅 (Planned)
+- Integration with external tools
+- Advanced monitoring and alerting
+- Automated workflow optimization refinements
+- Cross-project learning and patterns
 
 ---
 
@@ -247,6 +281,7 @@ For questions about the multi-agent system:
 4. Use coord agent for workflow guidance
 5. Use validator agent for quality assurance
 
-**System Version**: 2.1.0  
-**Last Updated**: 2025-08-22  
-**Maintained by**: Multi-Agent Architecture Team
+**System Version**: 2.2.0  
+**Last Updated**: 2025-08-25  
+**Maintained by**: Multi-Agent Architecture Team  
+**Latest Features**: Workflow Intelligence + AI-Powered Conflict Resolution

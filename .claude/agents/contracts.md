@@ -209,7 +209,15 @@ const arquiContract: AgentContract = {
     "Technology stack changes", 
     "Performance issues",
     "Security vulnerabilities"
-  ]
+  ],
+  sla: {
+    responseTime: "8 hours for ADRs, 4 hours for constraints",
+    quality: [
+      { metric: "Decision completeness", target: "100% of ADR sections completed" },
+      { metric: "Technical feasibility", target: "All decisions implementable" },
+      { metric: "Risk assessment coverage", target: "All major risks identified" }
+    ]
+  }
 }
 ```
 
@@ -277,7 +285,15 @@ const frontContract: AgentContract = {
     "New user interface requirements",
     "Accessibility issues reported",
     "Performance constraints updated"
-  ]
+  ],
+  sla: {
+    responseTime: "6 hours for wireframes, 2 hours for design tokens",
+    quality: [
+      { metric: "Design consistency", target: "100% alignment with design system" },
+      { metric: "Accessibility compliance", target: "WCAG 2.1 AA standards met" },
+      { metric: "Performance impact", target: "UI decisions respect performance budget" }
+    ]
+  }
 }
 ```
 
@@ -354,7 +370,15 @@ const backendContract: AgentContract = {
     "Authentication implementation",
     "Performance optimization",
     "Integration with external services"
-  ]
+  ],
+  sla: {
+    responseTime: "12 hours for API specs, 1 day for data models",
+    quality: [
+      { metric: "API contract completeness", target: "100% of endpoints documented" },
+      { metric: "Security implementation", target: "All auth patterns validated" },
+      { metric: "Performance benchmarks", target: "Response time targets defined" }
+    ]
+  }
 }
 ```
 
@@ -422,7 +446,15 @@ const qaContract: AgentContract = {
     "Architecture changes affecting testability", 
     "UI changes requiring test updates",
     "Quality issues in production"
-  ]
+  ],
+  sla: {
+    responseTime: "6 hours for test strategy, 4 hours for acceptance criteria",
+    quality: [
+      { metric: "Test coverage completeness", target: "Critical paths 100% covered" },
+      { metric: "Quality gate effectiveness", target: "Gates catch 95% of issues" },
+      { metric: "Test automation ratio", target: "80% automated test coverage" }
+    ]
+  }
 }
 ```
 
@@ -641,9 +673,226 @@ const validationRules: ValidationRule[] = [
 ]
 ```
 
-This contract system ensures:
-- **Clear dependencies** between agents
-- **Standardized handoff** formats
-- **Validation criteria** for each output
-- **Timing coordination** for optimal workflow
-- **Quality gates** at each interface point
+## New Intelligence Layer Contracts
+
+### 🔄 Workflow Agent (workflow)
+
+```typescript
+const workflowContract: AgentContract = {
+  metadata: {
+    name: "workflow",
+    version: "1.0.0",
+    lastUpdated: "2025-08-25",
+    model: "sonnet"
+  },
+  inputs: {
+    required: [
+      { name: "change-scope", type: "requirements", format: "markdown", source: "product" },
+      { name: "codebase-analysis", type: "architecture", format: "dependency-graph", source: "arq" }
+    ],
+    optional: [
+      { name: "historical-performance", type: "metrics", format: "json", source: "coord" },
+      { name: "resource-availability", type: "capacity", format: "structured-data", source: "coord" }
+    ],
+    dependencies: []
+  },
+  outputs: {
+    deliverables: [
+      {
+        name: "Workflow Classification",
+        type: "workflow-type",
+        format: "structured-recommendation",
+        consumers: ["coord", "validator"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Agent Execution Matrix",
+        type: "execution-plan",
+        format: "dependency-graph",
+        consumers: ["coord", "ai-resolver"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Timeline Prediction",
+        type: "performance-forecast",
+        format: "structured-metrics",
+        consumers: ["coord", "product"],
+        updateFrequency: "on-demand"
+      }
+    ],
+    constraints: [
+      "Workflow recommendations based on objective impact analysis",
+      "Resource predictions include confidence intervals",
+      "Performance forecasts validated against historical data"
+    ]
+  },
+  handoffs: {
+    to: ["coord", "ai-resolver"],
+    format: {
+      structure: "recommendation-justification-metrics",
+      sections: ["Workflow Classification", "Execution Strategy", "Performance Prediction", "Risk Assessment"],
+      validationCriteria: ["Impact analysis completed", "Resource estimation provided", "Timeline confidence > 70%"]
+    },
+    timing: "sequential"
+  },
+  triggers: [
+    "New development workflow initiated",
+    "Change in project scope or requirements",
+    "Resource availability changes",
+    "Performance optimization requests"
+  ],
+  sla: {
+    responseTime: "30 minutes for workflow classification, 2 hours for full analysis",
+    quality: [
+      { metric: "Workflow accuracy", target: "85% of recommendations optimal in retrospect" },
+      { metric: "Timeline precision", target: "Predictions within 20% of actual duration" },
+      { metric: "Resource optimization", target: "15% improvement in agent utilization" }
+    ]
+  }
+}
+```
+
+### 🤖 AI-Resolver Agent (ai-resolver)
+
+```typescript
+const aiResolverContract: AgentContract = {
+  metadata: {
+    name: "ai-resolver",
+    version: "1.0.0", 
+    lastUpdated: "2025-08-25",
+    model: "sonnet"
+  },
+  inputs: {
+    required: [
+      { name: "conflict-data", type: "conflicts", format: "structured-disagreement", source: "validator" },
+      { name: "agent-outputs", type: "multi-agent-data", format: "json", source: "coord" }
+    ],
+    optional: [
+      { name: "historical-resolutions", type: "resolution-history", format: "ml-dataset", source: "filesystem" },
+      { name: "success-metrics", type: "outcomes", format: "feedback-data", source: "coord" }
+    ],
+    dependencies: ["validator", "coord"]
+  },
+  outputs: {
+    deliverables: [
+      {
+        name: "Conflict Classification",
+        type: "conflict-analysis",
+        format: "categorized-report",
+        consumers: ["coord", "validator"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Resolution Recommendations",
+        type: "ml-solutions",
+        format: "ranked-options",
+        consumers: ["coord", "workflow"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Implementation Strategy",
+        type: "resolution-plan",
+        format: "step-by-step-guide",
+        consumers: ["coord", "all-agents"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Learning Feedback",
+        type: "model-improvement",
+        format: "training-data",
+        consumers: ["filesystem", "coord"],
+        updateFrequency: "continuous"
+      }
+    ],
+    constraints: [
+      "Recommendations only provided with >70% confidence score",
+      "High-impact decisions require human approval",
+      "All resolutions include success tracking mechanism"
+    ]
+  },
+  handoffs: {
+    to: ["coord", "workflow", "validator"],
+    format: {
+      structure: "analysis-recommendation-implementation",
+      sections: ["Conflict Analysis", "ML-Powered Solutions", "Trade-off Assessment", "Implementation Plan", "Success Metrics"],
+      validationCriteria: ["Confidence score provided", "Trade-offs analyzed", "Success criteria defined"]
+    },
+    timing: "conditional"
+  },
+  triggers: [
+    "Coordinator escalates unresolved conflicts",
+    "Validator detects significant inconsistencies", 
+    "Multiple agents produce contradictory outputs",
+    "Proactive conflict pattern detected"
+  ],
+  sla: {
+    responseTime: "1 hour for conflict analysis, 4 hours for resolution strategy",
+    quality: [
+      { metric: "Resolution success rate", target: "80% of resolutions successfully implemented" },
+      { metric: "Conflict prevention", target: "30% reduction in recurring conflict patterns" },
+      { metric: "Agent satisfaction", target: "Agent acceptance rate >85% for recommendations" }
+    ]
+  }
+}
+```
+
+### 🔗 Enhanced Cross-Agent Handoffs
+
+#### workflow → coord Handoff
+```markdown
+## Workflow → Coordinator Handoff
+
+### Workflow Analysis Summary
+- **Recommended Type**: [Sequential/Parallel/Iterative/Hybrid] with confidence score
+- **Impact Assessment**: [Change scope, coupling analysis, dependency complexity]
+- **Resource Optimization**: [Agent workload distribution, parallel opportunities]
+- **Critical Path**: [Bottleneck identification, timeline optimization]
+
+### Execution Strategy
+- **Agent Sequence**: [Optimal ordering with dependencies mapped]
+- **Parallel Opportunities**: [Which agents can work simultaneously]
+- **Risk Mitigation**: [Potential blocking points and prevention strategies]
+- **Performance Prediction**: [Timeline estimate with confidence intervals]
+
+### Validation Checklist
+- [ ] Workflow type justified with impact analysis
+- [ ] Resource estimation includes confidence levels
+- [ ] Critical dependencies identified and planned
+- [ ] Success criteria and monitoring plan defined
+```
+
+#### ai-resolver → coord Handoff
+```markdown
+## AI-Resolver → Coordinator Handoff
+
+### Conflict Resolution Summary
+- **Conflict Classification**: [Technical/Business/Resource/Quality] with severity
+- **Root Cause Analysis**: [Pattern identification, contributing factors]
+- **Resolution Options**: [Ranked by confidence score and impact]
+- **Recommended Solution**: [Top choice with trade-off analysis]
+
+### Implementation Strategy
+- **Action Plan**: [Step-by-step resolution approach]
+- **Agent Coordination**: [Required agent interactions and dependencies]
+- **Success Metrics**: [How to measure resolution effectiveness]
+- **Monitoring Plan**: [Early warning indicators for resolution failure]
+
+### Learning Integration
+- **Pattern Updates**: [New conflict patterns identified]
+- **Model Refinement**: [Success/failure data for ML improvement]
+- **Prevention Strategy**: [Proactive measures to avoid similar conflicts]
+
+### Validation Checklist
+- [ ] Conflict thoroughly analyzed with ML insights
+- [ ] Resolution confidence score >70%
+- [ ] Implementation plan with clear ownership
+- [ ] Success tracking and learning feedback loop established
+```
+
+This enhanced contract system now ensures:
+- **Clear dependencies** between all agents including intelligence layer
+- **Standardized handoff** formats with ML-powered insights
+- **Validation criteria** for each output including confidence scoring
+- **Timing coordination** for optimal workflow with predictive optimization
+- **Quality gates** at each interface point with continuous learning
+- **Intelligence integration** across workflow detection and conflict resolution
