@@ -80,8 +80,8 @@ graph TB
 ## 📁 File Structure
 
 ```
-src/.claude/agents/
-├── README.md                 # This index file
+.claude/agents/               # 🤖 EXECUTABLE AGENTS
+├── README.md                 # Quick reference
 ├── product.md               # Product Owner Agent (New v1.0)
 ├── arq.md                   # Architecture Agent (Enhanced v2.0)
 ├── front.md                 # Frontend Agent (Enhanced v2.0)  
@@ -91,10 +91,15 @@ src/.claude/agents/
 ├── devops.md                # DevOps Agent (New)
 ├── validator.md             # Validator Agent (New)
 ├── workflow.md              # Workflow Intelligence Agent (Latest v1.0)
-├── ai-resolver.md           # AI Conflict Resolution Agent (Latest v1.0)
+└── ai-resolver.md           # AI Conflict Resolution Agent (Latest v1.0)
+
+Documentacion Agentes/       # 📚 SYSTEM DOCUMENTATION
+├── README.md                # This system overview
 ├── contracts.md             # Interface Contracts
 ├── workflows.md             # Workflow Definitions
-└── implementation-guide.md  # Usage Guidelines
+├── execution-mechanics.md   # How the system really works
+├── implementation-guide.md  # Usage Guidelines
+└── usage-guide.md           # Usage Examples
 ```
 
 ## 🚀 Quick Start Guide
