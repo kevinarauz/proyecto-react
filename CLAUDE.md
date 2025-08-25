@@ -148,10 +148,91 @@ npm install primereact primeicons primeflex
 4. **Persistencia**: Sesión se mantiene al refrescar
 5. **Logout**: Regresa al login y limpia sesión
 
+## 🤖 Sistema Multi-Agent Claude (v2.2.0)
+
+Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo:
+
+### Agentes Disponibles
+
+| Agent | Role | Usage |
+|-------|------|-------|
+| **@product** | Product Owner | `@product: define user stories for [feature]` |
+| **@arq** | Software Architect | `@arq: analyze architecture for [system]` |
+| **@front** | Frontend Designer | `@front: design UI for [interface]` |
+| **@qa** | QA Engineer | `@qa: create test strategy for [feature]` |
+| **@backend** | Backend Engineer | `@backend: design API for [functionality]` |
+| **@devops** | Platform Engineer | `@devops: setup CI/CD for [project]` |
+| **@coord** | Technical Lead | `@coord: orchestrate workflow for [initiative]` |
+| **@validator** | Integration Validator | `@validator: validate consistency between outputs` |
+| **@workflow** | Workflow Intelligence | `@workflow: optimize execution sequence for [changes]` |
+| **@ai-resolver** | AI Conflict Resolution | `@ai-resolver: resolve conflicts between [agents]` |
+
+### Quick Start con Agentes
+
+```bash
+# 1. Planificación estratégica
+@coord: plan implementation of new Excel export feature
+
+# 2. Seguir roadmap generado
+@arq: design architecture for Excel generation
+@front: design UI for export functionality
+@qa: create testing strategy for Excel export
+@devops: setup CI/CD for new feature
+
+# 3. Validación
+@validator: validate consistency across all outputs
+```
+
+### Estructura del Sistema
+
+```
+.claude/agents/              # 🤖 Agentes ejecutables
+├── product.md              # Product Owner Agent
+├── arq.md                  # Architecture Agent  
+├── front.md                # Frontend Agent
+├── qa.md                   # QA Agent
+├── backend.md              # Backend Agent
+├── devops.md               # DevOps Agent
+├── coord.md                # Coordinator Agent
+├── validator.md            # Validator Agent
+├── workflow.md             # Workflow Intelligence Agent
+└── ai-resolver.md          # AI Conflict Resolution Agent
+
+Documentacion Agentes/       # 📚 Documentación del sistema
+├── README.md               # System overview
+├── contracts.md            # Interface contracts
+├── workflows.md            # Workflow definitions
+├── execution-mechanics.md  # System mechanics
+├── implementation-guide.md # Usage guidelines
+└── usage-guide.md          # Usage examples
+```
+
+### Features Avanzadas
+
+- **🧠 Workflow Intelligence**: Auto-detección del tipo de workflow óptimo
+- **🤖 AI Conflict Resolution**: Resolución de conflictos con ML
+- **🔄 Orquestación Automática**: Coordinación inteligente entre agentes
+- **✅ Validación Cruzada**: Verificación de consistencia entre outputs
+- **📊 Quality Gates**: Métricas y umbrales de calidad automatizados
+
+### 💻 Funcionalidades Excel Integration
+
+- **ExcelGenerator**: Generador de Excel con formato profesional
+- **Dependencies**: xlsx + file-saver instalados
+- **HTML Generator**: Generador standalone para pruebas
+
+```typescript
+// Ejemplo de uso
+const excelGenerator = new ExcelGenerator();
+await excelGenerator.generateDocument(documentData);
+```
+
 ## Notas importantes
 
 - **Versiones compatibles**: Las dependencias están configuradas para Node.js v18
 - **FSD Template**: Este proyecto sirve como template para futuros proyectos escalables
 - **TypeScript**: Path mappings configurados para IntelliSense completo
+- **Multi-Agent System**: Sistema nivel enterprise con 10 agentes especializados
+- **Excel Generation**: Sistema completo para generación de documentos Excel
 - **Credenciales mock**: Solo para desarrollo - cambiar en producción
 - **localStorage**: Persistencia básica - considerar tokens JWT en producción
