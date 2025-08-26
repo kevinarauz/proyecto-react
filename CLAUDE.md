@@ -148,25 +148,27 @@ npm install primereact primeicons primeflex
 4. **Persistencia**: Sesión se mantiene al refrescar
 5. **Logout**: Regresa al login y limpia sesión
 
-## 🤖 Sistema Multi-Agent Claude (v2.2.0)
+## 🤖 Sistema Multi-Agent Claude (v2.3.0)
 
 Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo:
 
-### Agentes Disponibles
+### Agentes Disponibles (13 Agentes Especializados)
 
-| Agent | Role | Usage |
-|-------|------|-------|
-| **@product** | Product Owner | `@product: define user stories for [feature]` |
-| **@arq** | Software Architect | `@arq: analyze architecture for [system]` |
-| **@front** | Frontend Designer | `@front: design UI for [interface]` |
-| **@qa** | QA Engineer | `@qa: create test strategy for [feature]` |
-| **@backend** | Backend Engineer | `@backend: design API for [functionality]` |
-| **@devops** | Platform Engineer | `@devops: setup CI/CD for [project]` |
-| **@coord** | Technical Lead | `@coord: orchestrate workflow for [initiative]` |
-| **@validator** | Integration Validator | `@validator: validate consistency between outputs` |
-| **@workflow** | Workflow Intelligence | `@workflow: optimize execution sequence for [changes]` |
-| **@ai-resolver** | AI Conflict Resolution | `@ai-resolver: resolve conflicts between [agents]` |
-| **@performance** | Performance Engineer | `@performance: optimize performance for [system/feature]` |
+| Agent | Role | Usage | Version |
+|-------|------|-------|------|
+| **@product** | Product Owner | `@product: define user stories for [feature]` | v1.0.0 |
+| **@arq** | Software Architect | `@arq: analyze architecture for [system]` | v2.0.0 |
+| **@front** | Frontend Designer | `@front: design UI for [interface]` | v2.0.0 |
+| **@qa** | QA Engineer | `@qa: create test strategy for [feature]` | v2.0.0 |
+| **@backend** | Backend Engineer | `@backend: design API for [functionality]` | v1.0.0 |
+| **@devops** | Platform Engineer | `@devops: setup CI/CD for [project]` | v1.0.0 |
+| **@coord** | Technical Lead | `@coord: orchestrate workflow for [initiative]` | v1.0.0 |
+| **@validator** | Integration Validator | `@validator: validate consistency between outputs` | v1.0.0 |
+| **@workflow** | Workflow Intelligence | `@workflow: optimize execution sequence for [changes]` | v1.0.0 |
+| **@ai-resolver** | AI Conflict Resolution | `@ai-resolver: resolve conflicts between [agents]` | v1.0.0 |
+| **@performance** | Performance Engineer | `@performance: optimize performance for [system/feature]` | v1.0.0 |
+| **@reporting** | Analytics & Metrics | `@reporting: generate system performance dashboard` | v1.0.0 🆕 |
+| **@dios** | Beast Mode Agent | `@dios: autonomous problem solving with research` | v1.0.0 🆕 |
 
 ### Quick Start con Agentes
 
@@ -188,7 +190,7 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 ### Estructura del Sistema
 
 ```
-.claude/agents/              # 🤖 Agentes ejecutables
+.claude/agents/              # 🤖 Agentes ejecutables (13 agentes)
 ├── product.md              # Product Owner Agent
 ├── arq.md                  # Architecture Agent  
 ├── front.md                # Frontend Agent
@@ -199,25 +201,37 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 ├── validator.md            # Validator Agent
 ├── workflow.md             # Workflow Intelligence Agent
 ├── ai-resolver.md          # AI Conflict Resolution Agent
-└── performance.md          # Performance Engineering Agent
+├── performance.md          # Performance Engineering Agent
+├── reporting.md            # Analytics & Metrics Agent 🆕
+└── dios.md                 # Beast Mode Agent (v3.1) 🆕
 
 Documentacion Agentes/       # 📚 Documentación del sistema
-├── README.md               # System overview
+├── README.md               # System overview (v2.3.0)
 ├── contracts.md            # Interface contracts
 ├── workflows.md            # Workflow definitions
-├── execution-mechanics.md  # System mechanics
+├── execution-mechanics.md  # System mechanics + Error Handling
 ├── implementation-guide.md # Usage guidelines
-└── usage-guide.md          # Usage examples
+├── usage-guide.md          # Usage examples + Error Recovery
+└── troubleshooting-guide.md # Enterprise Troubleshooting Playbook 🆕
 ```
 
-### Features Avanzadas
+### Features Avanzadas (v2.3.0)
 
+#### 🎯 **Core Intelligence**
 - **🧠 Workflow Intelligence**: Auto-detección del tipo de workflow óptimo
 - **🤖 AI Conflict Resolution**: Resolución de conflictos con ML
-- **🔄 Orquestación Automática**: Coordinación inteligente entre agentes
+- **🔄 Orquestación Manual**: Coordinación estratégica entre agentes (requiere ejecución manual)
 - **✅ Validación Cruzada**: Verificación de consistencia entre outputs
 - **📊 Quality Gates**: Métricas y umbrales de calidad automatizados
 - **⚡ Performance Engineering**: Optimización y monitoreo de rendimiento end-to-end
+
+#### 🆕 **Nuevas Capacidades v2.3.0**
+- **🚨 Sistema de Error Handling Enterprise**: Circuit breakers, fallback strategies
+- **📈 Analytics & Reporting**: Dashboard ejecutivo con métricas de sistema
+- **🤖 Beast Mode Agent**: Resolución autónoma con investigación web recursiva
+- **🔧 Troubleshooting Playbook**: SOPs y procedimientos de recuperación
+- **📊 Monitoreo de Salud**: Detección automática de fallos de agentes
+- **🛡️ Degradación Graceful**: Sistemas de respaldo jerárquicos
 
 ### 💻 Funcionalidades Excel Integration
 
@@ -231,12 +245,144 @@ const excelGenerator = new ExcelGenerator();
 await excelGenerator.generateDocument(documentData);
 ```
 
-## Notas importantes
+## 📋 Notas importantes
 
+### 🔧 **Técnicas**
 - **Versiones compatibles**: Las dependencias están configuradas para Node.js v18
 - **FSD Template**: Este proyecto sirve como template para futuros proyectos escalables
 - **TypeScript**: Path mappings configurados para IntelliSense completo
-- **Multi-Agent System**: Sistema nivel enterprise con 11 agentes especializados
 - **Excel Generation**: Sistema completo para generación de documentos Excel
+- **⚡ Performance Engineering**: Sistema de optimización continua implementado
+
+### 🤖 **Multi-Agent System (v2.3.0)**
+- **13 Agentes Especializados**: Sistema nivel enterprise con error handling completo
+- **Beast Mode (@dios)**: Agent autónomo con investigación web recursiva
+- **Reporting System (@reporting)**: Analytics y métricas de rendimiento en tiempo real
+- **Circuit Breaker Patterns**: Recuperación automática de fallos de agentes
+- **Enterprise Troubleshooting**: Playbook completo con SOPs y procedimientos
+
+### 🔒 **Seguridad y Producción**
 - **Credenciales mock**: Solo para desarrollo - cambiar en producción
 - **localStorage**: Persistencia básica - considerar tokens JWT en producción
+- **Agent Security**: Validación de outputs y filtrado de contenido malicioso
+
+### 📚 **Documentación Completa**
+- **Troubleshooting Guide**: Procedimientos de emergencia y recuperación
+- **Execution Mechanics**: Cómo funciona realmente el sistema multi-agente
+- **Usage Examples**: Casos de uso prácticos con manejo de errores
+
+---
+
+## 🚨 Sistema de Error Handling Enterprise (v2.3.0)
+
+### 🔧 **Características Principales**
+
+#### **Circuit Breaker Patterns**
+```yaml
+failure_thresholds:
+  architecture: 2 failures → 5min timeout
+  frontend: 2 failures → 5min timeout  
+  qa: 3 failures → 5min timeout
+  coordinator: 3 failures → 10min timeout
+```
+
+#### **Fallback Hierarchy (4 Niveles)**
+1. **Request Simplification**: Reduce scope y complexity
+2. **Agent Substitution**: Use coordinator en mode específico  
+3. **Context Reset**: Fresh start sin previous context
+4. **Manual Override**: Consultation directo de documentation
+
+#### **Señales de Agent Failure**
+- **Response Quality Issues**: Respuestas genéricas, vagas o incompletas
+- **Context Corruption**: Agent menciona tecnologías incorrectas para el proyecto
+- **Response Time Issues**: Delays excesivos (>5 min) o timeouts
+
+### 🆕 **Agentes Nuevos v2.3.0**
+
+#### **@reporting - Analytics & Metrics Agent**
+```bash
+# Genera dashboards ejecutivos con métricas del sistema
+@reporting: generate comprehensive system health dashboard
+
+# Características:
+- KPIs consolidados de todos los agentes
+- Análisis de rendimiento y eficiencia 
+- Identificación de cuellos de botella
+- Recomendaciones de optimización
+- Alertas críticas y tendencias
+```
+
+#### **@dios - Beast Mode Agent (v3.1)**
+```bash
+# Resolución autónoma de problemas complejos
+@dios: research and implement authentication system with JWT
+
+# Características únicas:
+- Investigación web recursiva automática
+- Ejecución autónoma hasta completar la tarea
+- Validación con fuentes externas
+- Testing riguroso de soluciones
+- No requiere intervención manual
+```
+
+### 📚 **Documentación Enterprise Completa**
+
+#### **Troubleshooting Playbook**
+- **🔥 Emergencias**: Procedimientos de resolución inmediata
+- **🔧 Workflows Diagnósticos**: Health checks diarios y semanales  
+- **🛡️ Decision Trees**: Matrices de fallback por tipo de agente
+- **📊 Error Monitoring**: Dashboard manual de métricas de salud
+- **🔄 Recovery SOPs**: Procedimientos estándar operativos
+
+#### **Execution Mechanics**
+- **⚠️ Limitaciones Reales**: El coordinator NO ejecuta agentes automáticamente
+- **🔄 Patterns Reales**: Workflows manuales con handoffs explícitos
+- **🎯 Rol del Coordinator**: Strategic planner, no automation engine
+
+### 🎯 **Quick Start Actualizado**
+
+#### **Para Desarrollo Normal**
+```bash
+# Planificación estratégica
+@coord: plan implementation of user profile feature
+
+# Ejecución manual paso a paso
+@arq: design architecture for user profile [context from coord]
+@front: design UI for user profile [context from arq]
+@qa: create test strategy for user profile [context from arq + front]
+```
+
+#### **Para Problemas Complejos**
+```bash
+# Investigación autónoma completa
+@dios: research and implement complete Excel export system
+
+# Analytics del sistema
+@reporting: analyze current agent performance and system health
+```
+
+#### **Para Troubleshooting**
+```bash
+# Consultar guías específicas
+# Ver: Documentacion Agentes/troubleshooting-guide.md
+
+# Agent health check rápido
+@arq: confirm access to React architecture knowledge
+@front: confirm access to PrimeReact component knowledge
+```
+
+---
+
+## 🎯 **Sistema Estado: PRODUCTIVO**
+
+**Última Actualización**: 2025-08-26  
+**Versión Sistema Multi-Agente**: v2.3.0  
+**Estado de Salud**: 🟢 Operativo (con error handling completo)  
+**Agentes Activos**: 13/13  
+**Documentación**: 📚 Completa con troubleshooting enterprise
+
+### 🚀 **Roadmap v2.4.0**
+- [ ] **Agent Health Monitoring**: Métricas automáticas en tiempo real
+- [ ] **Predictive Failure Detection**: ML para prevención de errores  
+- [ ] **Cross-Agent Learning**: Patterns y optimización automática
+- [ ] **Performance Budget Integration**: Monitoreo continuo de rendimiento
