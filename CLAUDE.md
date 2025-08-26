@@ -148,44 +148,57 @@ npm install primereact primeicons primeflex
 4. **Persistencia**: Sesión se mantiene al refrescar
 5. **Logout**: Regresa al login y limpia sesión
 
-## 🤖 Sistema Multi-Agent Claude (v2.3.0)
+## 🤖 Sistema Multi-Agent Claude Code Terminal (v2.3.0)
 
-Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo:
+Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo en **Claude Code Terminal**.
+
+### 🔧 **Características del Sistema**
+- **13 Agentes Especializados**: Cada uno con expertise específico
+- **Sintaxis Específica**: `@agent-nombre` exclusiva para Claude Code Terminal
+- **Generación de Archivos**: Los agentes crean documentos y código automáticamente
+- **Ejecución Individual**: Cada agente se ejecuta por separado, no en batch
 
 ### Agentes Disponibles (13 Agentes Especializados)
 
-| Agent | Role | Usage | Version |
-|-------|------|-------|------|
-| **@product** | Product Owner | `@product: define user stories for [feature]` | v1.0.0 |
-| **@arq** | Software Architect | `@arq: analyze architecture for [system]` | v2.0.0 |
-| **@front** | Frontend Designer | `@front: design UI for [interface]` | v2.0.0 |
-| **@qa** | QA Engineer | `@qa: create test strategy for [feature]` | v2.0.0 |
-| **@backend** | Backend Engineer | `@backend: design API for [functionality]` | v1.0.0 |
-| **@devops** | Platform Engineer | `@devops: setup CI/CD for [project]` | v1.0.0 |
-| **@coord** | Technical Lead | `@coord: orchestrate workflow for [initiative]` | v1.0.0 |
-| **@validator** | Integration Validator | `@validator: validate consistency between outputs` | v1.0.0 |
-| **@workflow** | Workflow Intelligence | `@workflow: optimize execution sequence for [changes]` | v1.0.0 |
-| **@ai-resolver** | AI Conflict Resolution | `@ai-resolver: resolve conflicts between [agents]` | v1.0.0 |
-| **@performance** | Performance Engineer | `@performance: optimize performance for [system/feature]` | v1.0.0 |
-| **@reporting** | Analytics & Metrics | `@reporting: generate system performance dashboard` | v1.0.0 🆕 |
-| **@dios** | Beast Mode Agent | `@dios: autonomous problem solving with research` | v1.0.0 🆕 |
+| Agent | Role | Sintaxis Claude Code | Funcionalidad |
+|-------|------|---------------------|---------------|
+| **@agent-product** | Product Owner | `@agent-product [task]` | Define user stories y criterios aceptación |
+| **@agent-arq** | Software Architect | `@agent-arq [task]` | Analiza arquitectura y decisiones técnicas |
+| **@agent-front** | Frontend Designer | `@agent-front [task]` | Diseña UI/UX y componentes frontend |
+| **@agent-qa** | QA Engineer | `@agent-qa [task]` | Crea estrategias de testing y QA |
+| **@agent-backend** | Backend Engineer | `@agent-backend [task]` | Diseña APIs y arquitectura backend |
+| **@agent-devops** | Platform Engineer | `@agent-devops [task]` | Configura CI/CD e infraestructura |
+| **@agent-coord** | Technical Lead | `@agent-coord [task]` | Orquesta workflows y coordinación |
+| **@agent-validator** | Integration Validator | `@agent-validator [task]` | Valida consistencia entre outputs |
+| **@agent-workflow** | Workflow Intelligence | `@agent-workflow [task]` | Optimiza secuencias de ejecución |
+| **@agent-ai-resolver** | AI Conflict Resolution | `@agent-ai-resolver [task]` | Resuelve conflictos entre agentes |
+| **@agent-performance** | Performance Engineer | `@agent-performance [task]` | Optimiza rendimiento y performance |
+| **@agent-reporting** | Analytics & Metrics | `@agent-reporting [task]` | Genera dashboards y métricas 🆕 |
+| **@agent-dios** | Beast Mode Agent | `@agent-dios [task]` | Resolución autónoma con research 🆕 |
 
 ### Quick Start con Agentes
 
+**⚠️ IMPORTANTE: En Claude Code Terminal los agentes se ejecutan con sintaxis específica:**
+
 ```bash
 # 1. Planificación estratégica
-@coord: plan implementation of new Excel export feature
+@agent-coord plan implementation of new Excel export feature
 
 # 2. Seguir roadmap generado
-@arq: design architecture for Excel generation
-@front: design UI for export functionality
-@performance: analyze performance impact of Excel generation
-@qa: create testing strategy for Excel export
-@devops: setup CI/CD for new feature
+@agent-arq design architecture for Excel generation
+@agent-front design UI for export functionality
+@agent-performance analyze performance impact of Excel generation
+@agent-qa create testing strategy for Excel export
+@agent-devops setup CI/CD for new feature
 
 # 3. Validación
-@validator: validate consistency across all outputs
+@agent-validator validate consistency across all outputs
 ```
+
+**Sintaxis correcta de ejecución:**
+- ✅ `@agent-nombre` - Funciona en Claude Code Terminal
+- ❌ `@nombre:` - NO funciona, es solo documentación
+- ❌ `/agents nombre` - NO es la sintaxis correcta
 
 ### Estructura del Sistema
 
@@ -299,10 +312,10 @@ failure_thresholds:
 
 ### 🆕 **Agentes Nuevos v2.3.0**
 
-#### **@reporting - Analytics & Metrics Agent**
+#### **@agent-reporting - Analytics & Metrics Agent**
 ```bash
 # Genera dashboards ejecutivos con métricas del sistema
-@reporting: generate comprehensive system health dashboard
+@agent-reporting generate comprehensive system health dashboard
 
 # Características:
 - KPIs consolidados de todos los agentes
@@ -312,10 +325,10 @@ failure_thresholds:
 - Alertas críticas y tendencias
 ```
 
-#### **@dios - Beast Mode Agent (v3.1)**
+#### **@agent-dios - Beast Mode Agent (v3.1)**
 ```bash
 # Resolución autónoma de problemas complejos
-@dios: research and implement authentication system with JWT
+@agent-dios research and implement authentication system with JWT
 
 # Características únicas:
 - Investigación web recursiva automática
@@ -344,21 +357,21 @@ failure_thresholds:
 #### **Para Desarrollo Normal**
 ```bash
 # Planificación estratégica
-@coord: plan implementation of user profile feature
+@agent-coord plan implementation of user profile feature
 
 # Ejecución manual paso a paso
-@arq: design architecture for user profile [context from coord]
-@front: design UI for user profile [context from arq]
-@qa: create test strategy for user profile [context from arq + front]
+@agent-arq design architecture for user profile [context from coord]
+@agent-front design UI for user profile [context from arq]
+@agent-qa create test strategy for user profile [context from arq + front]
 ```
 
 #### **Para Problemas Complejos**
 ```bash
 # Investigación autónoma completa
-@dios: research and implement complete Excel export system
+@agent-dios research and implement complete Excel export system
 
 # Analytics del sistema
-@reporting: analyze current agent performance and system health
+@agent-reporting analyze current agent performance and system health
 ```
 
 #### **Para Troubleshooting**
@@ -367,8 +380,8 @@ failure_thresholds:
 # Ver: Documentacion Agentes/troubleshooting-guide.md
 
 # Agent health check rápido
-@arq: confirm access to React architecture knowledge
-@front: confirm access to PrimeReact component knowledge
+@agent-arq confirm access to React architecture knowledge
+@agent-front confirm access to PrimeReact component knowledge
 ```
 
 ---
