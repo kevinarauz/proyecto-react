@@ -425,6 +425,372 @@ graph TD
 
 ---
 
-**Versión**: 1.0  
-**Última actualización**: 2025-08-20  
-**Próxima revisión**: Basada en usage patterns y feedback
+## 🚨 **Manejo de Errores en Uso Práctico**
+
+### **Reconocer Cuándo un Agente Está Fallando**
+
+#### **🔍 Señales de Warning**
+
+**Agent Response Quality Issues:**
+```bash
+# ❌ Respuesta genérica - posible agent overload
+@arq: evalúa la arquitectura del proyecto
+# Output: "La arquitectura parece estar bien. Hay algunas áreas que podrían mejorarse."
+# PROBLEMA: No specific, no actionable, demasiado genérico
+
+# ✅ Response esperada en estado normal
+# Output: "Análisis específico de FSD implementation, issues concretos identificados, recommendations precisas"
+```
+
+**Context Corruption Signals:**
+```bash
+# ❌ Agent confunde contexts
+@front: diseña UI para el sistema de posts basándote en la arquitectura definida por @arq
+# Output menciona: "MongoDB schemas, Express routes, Node.js authentication"
+# PROBLEMA: Agente está pensando en backend, no frontend React
+```
+
+**Agent Availability Issues:**
+```bash
+# ❌ Response time excesivo
+@coord: planifica implementación de [complex feature]
+# > 5 minutes sin response, o respuesta muy breve después de delay
+# PROBLEMA: Posible circuit breaker activation necesaria
+```
+
+#### **🔄 Recovery Strategies Prácticas**
+
+**Strategy 1: Request Simplification**
+```bash
+# Original request que falla
+@arq: evalúa toda la arquitectura React + implementa migration strategy + optimize performance + update security
+
+# ⬇️ Simplify progresivamente
+@arq: evalúa únicamente la current React architecture structure usando FSD
+
+# ⬇️ Más simple
+@arq: list las principales carpetas arquitectónicas del proyecto src/
+
+# ⬇️ Minimal viable request
+@arq: confirma que el proyecto usa Feature-Sliced Design
+```
+
+**Strategy 2: Context Reset**
+```bash
+# Si agente parece confundido
+@front: [previous context confuso] diseña nuevo component...
+# ❌ Output inconsistente
+
+# ✅ Reset context approach
+@front: sin considerar conversación previa, revisa el design system actual del proyecto React con PrimeReact
+
+# ✅ Fresh start approach
+@front: starting fresh - evalúa la UI consistency del proyecto actual
+```
+
+**Strategy 3: Agent Substitution**
+```bash
+# Primary agent fails
+@arq: [consistently poor responses about architecture]
+
+# Fallback a coordinator en mode específico
+@coord: actúa como architecture consultant y evalúa la estructura React usando FSD principles
+
+# Alternative fallback a validator
+@validator: desde perspectiva de architecture quality, evalúa la current project structure
+```
+
+---
+
+### **🎯 Error Recovery Workflows Paso a Paso**
+
+#### **Workflow Type 1: Single Agent Failure**
+
+**Scenario:** @arq falla repetitivamente
+```bash
+# Step 1: Detect pattern
+@arq: evalúa arquitectura (respuesta vaga o incompleta)
+@arq: analiza performance (otra respuesta poor quality)
+@arq: revisa security (third failure)
+
+# Step 2: Circuit breaker mental activation
+# Usuario reconoce pattern de 3 failures
+
+# Step 3: Fallback hierarchy
+# Level 1: Simplify request
+@arq: list únicamente las carpetas principales de src/
+
+# Level 2: Agent substitution
+@coord: en role de architect, evalúa project structure
+
+# Level 3: Manual fallback
+# Consultar documentation directo, tomar decisión manual
+```
+
+#### **Workflow Type 2: Context Transfer Failure**
+
+**Scenario:** Information perdida entre agentes
+```bash
+# Expected workflow
+@arq: diseña JWT authentication strategy
+# Output: Detailed JWT implementation plan
+
+@front: basándote en la auth strategy de @arq, diseña login UI
+# Output: UI que no considera JWT requirements específicos
+# PROBLEMA: Context no transferred correctly
+
+# Recovery workflow
+# Step 1: Context audit
+# Review que specific information needed transferir
+
+# Step 2: Explicit context bridging
+@front: usando específicamente estos JWT requirements de @arq: [copy exact requirements], diseña login UI
+
+# Step 3: Cross-validation
+@validator: verifica que frontend design es consistent con JWT authentication approach
+```
+
+#### **Workflow Type 3: Multi-Agent Coordination Failure**
+
+**Scenario:** Conflictos entre múltiples agentes
+```bash
+# Problem scenario
+@arq: recomienda usar Zustand para state management
+@front: sugiere usar Context API para simplicidad  
+@qa: prefiere Redux para testing easiness
+
+# Recovery workflow
+# Step 1: Conflict identification
+@coord: identifica y analiza conflict entre state management approaches
+
+# Step 2: Resolution facilitation
+@coord: facilita decision entre Zustand vs Context API vs Redux considerando project requirements
+
+# Step 3: Consensus building  
+@coord: una vez decidido, crea implementation plan que todos los agentes puedan support
+```
+
+---
+
+### **📊 Realistic Usage Examples con Error Handling**
+
+#### **Example 1: Daily Development con Fallbacks**
+
+**Morning Architecture Review:**
+```bash
+# Primary approach
+@arq: evalúa tech debt en el proyecto React actual
+
+# Si quality pobre, fallback progression
+@arq: identifica top 3 architecture issues únicamente
+
+# Si sigue poor, agent substitution
+@coord: en architect mode, identifica main structural concerns
+
+# Si todo falla, manual approach
+# Consultar FSD documentation + hacer review manual del código
+```
+
+**Feature Development con Error Resilience:**
+```bash
+# Start optimistic
+@coord: orquesta implementación de dark mode feature
+
+# Si coordinator overloaded, decompose
+@arq: analiza únicamente requirements de theme switching architecture
+@front: diseña únicamente UI toggle component
+@qa: define únicamente critical test cases
+
+# Si individual agents fail, further simplify
+@front: confirma que PrimeReact soporta theme switching
+@qa: list minimum test cases para theme functionality
+```
+
+#### **Example 2: Complex Workflow con Circuit Breaker**
+
+**New Feature Implementation:**
+```bash
+# Attempt 1: Full workflow
+@coord: implementa sistema completo de notificaciones push
+# Resultado: Overloaded response, inconsistent plan
+
+# Circuit breaker activation - decompose
+@coord: planifica únicamente backend infrastructure para notifications
+
+# Success? Continue with next component
+@coord: basándote en notification infrastructure, planifica frontend UI
+
+# Build incrementally
+@coord: con backend + frontend ready, planifica testing strategy
+```
+
+#### **Example 3: Emergency Response con Degradation**
+
+**Production Issue Troubleshooting:**
+```bash
+# Urgent production issue
+@devops: diagnostica problema deployment crítico en production
+# No response o response inadequate
+
+# Immediate fallback
+@coord: en infrastructure consultant mode, troubleshoot deployment issue
+
+# Still failing? Emergency degradation
+@arq: list possible causes de deployment failures
+
+# Manual emergency response
+# Consult deployment documentation, check logs manually
+```
+
+---
+
+### **🎯 Best Practices Actualizadas con Error Resilience**
+
+#### **Request Planning con Error Prevention**
+
+**Before cada agent request:**
+```bash
+# 1. Check agent recent performance
+# ¿Ha respondido bien el agente recent conversations?
+
+# 2. Assess request complexity
+# ¿Es esto too complex para single agent request?
+
+# 3. Prepare fallback strategy  
+# ¿Qué haré si este agente no responde well?
+
+# 4. Set quality expectations
+# ¿Qué minimum quality necesito para consider success?
+```
+
+**Request Formulation con Redundancy:**
+```bash
+# ✅ Primary request con context claro
+@arq: usando FSD principles, evalúa current project structure en src/ y identifica violations
+
+# ✅ Include fallback instructions implícitas
+# Si request too complex, focus únicamente en carpetas principales
+
+# ✅ Context self-contained
+# Incluye toda información necesaria en single request
+```
+
+#### **Quality Gate Integration**
+
+**After cada agent response, evalúa:**
+```bash
+# Completeness check
+- ¿Response addresses all parts del request?
+- ¿Includes actionable recommendations?
+- ¿Format es consistent y usable?
+
+# Accuracy validation  
+- ¿Information es technically correct?
+- ¿Consistent con project context?
+- ¿No contradicts previous good decisions?
+
+# Actionability assessment
+- ¿Can implement recommendations directly?
+- ¿Clear next steps provided?
+- ¿Dependencies claramente identified?
+```
+
+**Quality threshold decision:**
+```bash
+# High quality (95%+) - Proceed normally
+# Good quality (80-95%) - Proceed con minor clarifications
+# Poor quality (60-80%) - Retry con simplified request
+# Failure quality (<60%) - Activate fallback strategy
+```
+
+---
+
+### **🔄 Adaptive Usage Patterns**
+
+#### **Learning from Failure Patterns**
+
+**Weekly Agent Performance Review:**
+```bash
+# Track cual agentes han sido reliable
+@arq: consistently good → Use freely
+@front: occasional issues → Monitor closely
+@coord: recent overloads → Use selectively
+
+# Adjust usage patterns
+- Use reliable agents para daily tasks
+- Prepare fallbacks para problematic agents
+- Monitor recovery de agents en degradation
+```
+
+#### **Context Size Management**
+
+**Dynamic Context Adjustment:**
+```bash
+# Start with minimal context
+@arq: evalúa current React project architecture
+
+# Add context incrementally si needed
+@arq: considerando que usamos PrimeReact + FSD, evalúa architecture consistency
+
+# Full context only when necessary
+@arq: basándote en previous decisions sobre JWT + routing + state management, evalúa complete integration
+```
+
+#### **Proactive Error Prevention**
+
+**Daily Usage Hygiene:**
+```bash
+# Morning agent health check
+@arq: quick check - ¿puedes acceder a React best practices?
+@front: quick check - ¿familiar con PrimeReact components?
+
+# Use check results para guide día usage
+# High confidence → Proceed con complex requests
+# Medium confidence → Use simpler, focused requests  
+# Low confidence → Prepare fallbacks, use minimal requests
+```
+
+---
+
+### **📈 ROI Optimization con Error Handling**
+
+#### **Cost-Benefit Analysis Actualizado**
+
+**Factor in Error Recovery Costs:**
+```yaml
+usage_cost_analysis:
+  normal_agent_request: 1x
+  agent_retry: +0.5x
+  fallback_agent: +1x
+  coordinator_rescue: +2x
+  manual_fallback: +0.5x_time + research_effort
+  
+total_real_world_cost_ranges:
+  simple_request: 1x - 2x (including potential retry)
+  medium_request: 1x - 3x (including potential fallback)
+  complex_request: 3x - 8x (including coordination overhead)
+```
+
+**ROI Decision Framework:**
+```bash
+# Quick daily tasks (expected <2x cost)
+✅ Use agentes directos freely
+⚠️ Have simple fallback ready
+
+# Medium complexity (expected 2-4x cost)  
+✅ Check agent availability first
+✅ Prepare fallback strategy
+⚠️ Consider if worth the complexity
+
+# High complexity (expected 4-8x cost)
+✅ Only for high-impact tasks
+✅ Full error recovery plan
+✅ Timeline buffer para failures
+```
+
+---
+
+**Versión**: 2.0  
+**Última actualización**: 2025-08-26  
+**Próxima revisión**: Basada en usage patterns, error analytics y feedback  
+**Changelog**: Agregado comprehensive error handling examples, recovery workflows y best practices actualizadas

@@ -97,9 +97,10 @@ Documentacion Agentes/       # 📚 SYSTEM DOCUMENTATION
 ├── README.md                # This system overview
 ├── contracts.md             # Interface Contracts
 ├── workflows.md             # Workflow Definitions
-├── execution-mechanics.md   # How the system really works
+├── execution-mechanics.md   # How the system really works + Error Handling
 ├── implementation-guide.md  # Usage Guidelines
-└── usage-guide.md           # Usage Examples
+├── usage-guide.md           # Usage Examples + Error Recovery
+└── troubleshooting-guide.md # 🆕 Enterprise Troubleshooting Playbook
 ```
 
 ## 🚀 Quick Start Guide
@@ -222,32 +223,84 @@ Each agent-to-agent handoff follows standardized templates defined in `contracts
 - **Implementation Success**: Outputs successfully implemented
 - **Stakeholder Satisfaction**: Feedback on deliverables
 
-## 🛠️ Troubleshooting
+## 🛠️ Error Handling & Troubleshooting
 
-### Common Issues
+### ⚠️ **NUEVA SECCIÓN**: Sistema de Manejo de Errores
 
-1. **Agent Conflicts**
-   - Use validator agent to identify inconsistencies
-   - Escalate to coordinator for resolution
-   - Document resolution for future reference
+> 📖 **Ver documentación completa**: [`execution-mechanics.md`](./execution-mechanics.md#🚨-sistema-de-manejo-de-errores-y-recuperación) - Sistema completo de circuit breakers, fallback strategies y error recovery
 
-2. **Missing Dependencies**
-   - Check contracts.md for required inputs
-   - Ensure prerequisite agents have completed outputs
-   - Use coord agent to orchestrate proper sequence
+#### 🚨 **Señales de Agent Failure**
+- **Response Quality Issues**: Respuestas genéricas, vagas o incompletas
+- **Context Corruption**: Agent menciona tecnologías incorrectas para el proyecto
+- **Response Time Issues**: Delays excesivos (>5 min) o timeouts
 
-3. **Quality Gate Failures**
-   - Review agent-specific quality criteria
-   - Use validator agent to identify specific failures
-   - Iterate with relevant agents to resolve issues
+#### 🔄 **Circuit Breaker System**
+```yaml
+failure_thresholds:
+  architecture: 2 failures → 5min timeout
+  frontend: 2 failures → 5min timeout  
+  qa: 3 failures → 5min timeout
+  coordinator: 3 failures → 10min timeout
+```
 
-### Best Practices
+#### 🛡️ **Fallback Hierarchy**
+1. **Request Simplification**: Reduce scope y complexity
+2. **Agent Substitution**: Use coordinator en mode específico  
+3. **Context Reset**: Fresh start sin previous context
+4. **Manual Override**: Consultation directo de documentation
+
+#### 📊 **Error Recovery Examples**
+```bash
+# Agent falla repetitivamente
+@arq: [poor quality responses]
+
+# Activate fallback progression
+@arq: list únicamente carpetas principales de src/
+# Si sigue poor → @coord: en architect mode, evalúa structure
+# Si todo falla → Manual documentation review
+```
+
+### Common Issues (Actualizadas)
+
+1. **Agent Execution Failures** 
+   - **Symptoms**: Incomplete outputs, generic responses, timeouts
+   - **Solution**: Apply [circuit breaker patterns](./execution-mechanics.md#🔄-circuit-breaker-patterns-para-agent-failures)
+   - **Fallback**: Use agent substitution o request simplification
+
+2. **Context Transfer Failures**
+   - **Symptoms**: Information loss between agents, inconsistent outputs
+   - **Solution**: Explicit context bridging con specific references
+   - **Prevention**: Self-contained requests con all necessary context
+
+3. **Workflow Coordination Errors**
+   - **Symptoms**: Wrong execution order, circular dependencies
+   - **Solution**: Use coordinator para proper orchestration
+   - **Recovery**: Decompose complex workflows into simpler sequential steps
+
+4. **Quality Gate Failures**
+   - **Symptoms**: Outputs below quality thresholds
+   - **Solution**: Apply [degradation graceful guidelines](./execution-mechanics.md#🔧-degradation-graceful-guidelines)
+   - **Escalation**: Manual intervention after 3 consecutive failures
+
+### Best Practices (Actualizadas con Error Resilience)
 
 1. **Always start with coord agent** for complex workflows
 2. **Use validator agent** before implementation
 3. **Follow contracts** for agent interactions
 4. **Document decisions** and rationale
 5. **Iterate when necessary** rather than forcing solutions
+
+#### 🆕 **Error Prevention & Recovery**
+6. **Monitor agent performance** - Track response quality patterns
+7. **Prepare fallback strategies** - Have backup plans para cada agent request
+8. **Use progressive complexity** - Start simple, add complexity incrementally  
+9. **Implement circuit breakers** - Stop using failing agents temporarily
+10. **Practice graceful degradation** - Reduce expectations cuando necessary
+
+#### 📚 **Essential Reading para Error Handling**
+- [`execution-mechanics.md`](./execution-mechanics.md#🚨-sistema-de-manejo-de-errores-y-recuperación) - Sistema completo de error handling
+- [`usage-guide.md`](./usage-guide.md#🚨-manejo-de-errores-en-uso-práctico) - Ejemplos prácticos de recovery
+- 🆕 [`troubleshooting-guide.md`](./troubleshooting-guide.md) - **Enterprise troubleshooting playbook completo**
 
 ## 🔮 Roadmap
 
@@ -286,7 +339,17 @@ For questions about the multi-agent system:
 4. Use coord agent for workflow guidance
 5. Use validator agent for quality assurance
 
-**System Version**: 2.2.0  
-**Last Updated**: 2025-08-25  
+**System Version**: 2.3.0  
+**Last Updated**: 2025-08-26  
 **Maintained by**: Multi-Agent Architecture Team  
-**Latest Features**: Workflow Intelligence + AI-Powered Conflict Resolution
+**Latest Features**: **Enterprise-grade Error Handling + Circuit Breaker System**
+
+### 🆕 **Version 2.3.0 Changelog**
+- ✅ **Circuit Breaker Patterns**: Automatic agent failure detection y recovery
+- ✅ **Hierarchical Fallback Strategies**: 4-level fallback system para all agents  
+- ✅ **Error Recovery Workflows**: Step-by-step recovery procedures
+- ✅ **Graceful Degradation**: Dynamic quality threshold management
+- ✅ **Realistic Usage Examples**: Updated con comprehensive error handling
+- ✅ **Monitoring & Analytics**: Agent health metrics y alerting system
+- ✅ **Prevention Best Practices**: Proactive error prevention guidelines
+- ✅ **Enterprise Troubleshooting Guide**: Complete playbook con SOPs y emergency procedures
