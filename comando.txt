@@ -7,8 +7,9 @@ claude --dangerously-skip-permissions
 #instalar route
 npm install react-router-dom
 
-#Agentes Claude (Multi-Agent System v2.3.0)
+#Agentes Claude (Multi-Agent System v2.4.0)
 # Agents ejecutables: .claude/agents/
 # Documentación: Documentacion Agentes/
 # Uso: @coord: plan [initiative] → seguir roadmap generado
-# Nuevo: @reporting: dashboard system performance y business metrics
+# Nuevo v2.4.0: @database: design data architecture y optimization
+# Analytics: @reporting: dashboard system performance y business metrics
