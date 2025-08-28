@@ -9,6 +9,7 @@
 | **front** | 2.0.0 | Diseñador Frontend | UI/UX, Design System, Accessibility | ✅ Enhanced |
 | **qa** | 2.0.0 | QA Engineer | Testing Strategy, Quality Gates | ✅ Enhanced |
 | **backend** | 1.0.0 | Backend Engineer | API Design, Data Modeling, Services | 🆕 New |
+| **dba** | 1.0.0 | Database Administrator | Database Design, Query Optimization, Data Security | 🆕 New |
 | **coord** | 1.0.0 | Technical Lead | Workflow Orchestration, Conflict Resolution | 🆕 New |
 | **devops** | 1.0.0 | Platform Engineer | CI/CD, Infrastructure, Monitoring | 🆕 New |
 | **validator** | 1.0.0 | Integration Validator | Cross-Agent Validation, Quality Gates | 🆕 New |
@@ -35,6 +36,7 @@ graph TB
         FRONT[Frontend Agent] 
         QA[QA Agent]
         BACKEND[Backend Agent]
+        DBA[Database Agent]
         DEVOPS[DevOps Agent]
     end
     
@@ -54,6 +56,7 @@ graph TB
     COORD --> FRONT
     COORD --> QA
     COORD --> BACKEND
+    COORD --> DBA
     COORD --> DEVOPS
     
     PRODUCT --> VAL
@@ -61,6 +64,7 @@ graph TB
     FRONT --> VAL
     QA --> VAL
     BACKEND --> VAL
+    DBA --> VAL
     DEVOPS --> VAL
     
     VAL --> COORD
@@ -87,6 +91,7 @@ graph TB
 ├── front.md                 # Frontend Agent (Enhanced v2.0)  
 ├── qa.md                    # QA Agent (Enhanced v2.0)
 ├── backend.md               # Backend Agent (New v1.0)
+├── dba.md                   # Database Agent (New v1.0)
 ├── coord.md                 # Coordinator Agent (New)
 ├── devops.md                # DevOps Agent (New)
 ├── validator.md             # Validator Agent (New)
@@ -129,25 +134,33 @@ Documentacion Agentes/       # 📚 SYSTEM DOCUMENTATION
 @qa: create a comprehensive test plan for the current features
 ```
 
-### 5. Workflow Orchestration
+### 5. Database Design & Optimization
+```bash
+# Use dba agent for database architecture and optimization
+@dba: design optimized database schema for user authentication and posts management
+@dba: analyze query performance and recommend indexing strategy
+@dba: create data migration plan for adding new user profile features
+```
+
+### 6. Workflow Orchestration
 ```bash
 # Use coord agent to manage multi-agent workflows
 @coord: orchestrate a workflow for implementing new authentication system
 ```
 
-### 6. Cross-Validation
+### 7. Cross-Validation
 ```bash
 # Use validator agent to check consistency
 @validator: validate outputs from product, arq, front, and qa agents
 ```
 
-### 7. Intelligent Workflow Detection
+### 8. Intelligent Workflow Detection
 ```bash
 # Use workflow agent to auto-detect optimal workflow type
 @workflow: analyze change impact and recommend workflow strategy
 ```
 
-### 8. AI-Powered Conflict Resolution
+### 9. AI-Powered Conflict Resolution
 ```bash
 # Use ai-resolver for complex conflict resolution
 @ai-resolver: resolve conflicts between architecture and UX recommendations
@@ -160,10 +173,13 @@ Documentacion Agentes/       # 📚 SYSTEM DOCUMENTATION
 | Use Case | Recommended Agent | Secondary Agents |
 |----------|-------------------|------------------|
 | **Product Requirements** | product | coord (prioritization) |
-| **New Feature Planning** | coord → product → arq → front → qa | devops, validator |
+| **New Feature Planning** | coord → product → arq → front → qa | backend, dba, devops, validator |
 | **Architecture Review** | arq | validator |
 | **UI/UX Improvements** | front | arq (constraints), qa (testing) |
 | **Testing Strategy** | qa | arq (requirements), front (UI specs) |
+| **Database Design** | dba | backend (APIs), arq (constraints) |
+| **Query Optimization** | dba | backend (performance), qa (testing) |
+| **Data Migration** | dba | devops (infrastructure), qa (validation) |
 | **Infrastructure Changes** | devops | arq (constraints), qa (quality gates) |
 | **Quality Assurance** | validator | All relevant agents |
 | **Conflict Resolution** | coord | Conflicting agents |
@@ -342,9 +358,11 @@ For questions about the multi-agent system:
 **System Version**: 2.3.0  
 **Last Updated**: 2025-08-26  
 **Maintained by**: Multi-Agent Architecture Team  
-**Latest Features**: **Enterprise-grade Error Handling + Circuit Breaker System**
+**Total Agents**: 11 Specialized Agents  
+**Latest Features**: **Database Agent + Enterprise-grade Error Handling + Circuit Breaker System**
 
 ### 🆕 **Version 2.3.0 Changelog**
+- ✅ **Database Agent (DBA)**: New specialized agent for database design, optimization and performance 🆕
 - ✅ **Circuit Breaker Patterns**: Automatic agent failure detection y recovery
 - ✅ **Hierarchical Fallback Strategies**: 4-level fallback system para all agents  
 - ✅ **Error Recovery Workflows**: Step-by-step recovery procedures

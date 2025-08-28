@@ -153,12 +153,12 @@ npm install primereact primeicons primeflex
 Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo en **Claude Code Terminal**.
 
 ### 🔧 **Características del Sistema**
-- **13 Agentes Especializados**: Cada uno con expertise específico
+- **14 Agentes Especializados**: Cada uno con expertise específico
 - **Sintaxis Específica**: `@agent-nombre` exclusiva para Claude Code Terminal
 - **Generación de Archivos**: Los agentes crean documentos y código automáticamente
 - **Ejecución Individual**: Cada agente se ejecuta por separado, no en batch
 
-### Agentes Disponibles (13 Agentes Especializados)
+### Agentes Disponibles (14 Agentes Especializados)
 
 | Agent | Role | Sintaxis Claude Code | Funcionalidad |
 |-------|------|---------------------|---------------|
@@ -167,6 +167,7 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 | **@agent-front** | Frontend Designer | `@agent-front [task]` | Diseña UI/UX y componentes frontend |
 | **@agent-qa** | QA Engineer | `@agent-qa [task]` | Crea estrategias de testing y QA |
 | **@agent-backend** | Backend Engineer | `@agent-backend [task]` | Diseña APIs y arquitectura backend |
+| **@agent-dba** | Database Administrator | `@agent-dba [task]` | Optimiza BD, schemas y performance 🆕 |
 | **@agent-devops** | Platform Engineer | `@agent-devops [task]` | Configura CI/CD e infraestructura |
 | **@agent-coord** | Technical Lead | `@agent-coord [task]` | Orquesta workflows y coordinación |
 | **@agent-validator** | Integration Validator | `@agent-validator [task]` | Valida consistencia entre outputs |
@@ -186,6 +187,8 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 
 # 2. Seguir roadmap generado
 @agent-arq design architecture for Excel generation
+@agent-backend design APIs for data export functionality  
+@agent-dba optimize database queries for large dataset exports
 @agent-front design UI for export functionality
 @agent-performance analyze performance impact of Excel generation
 @agent-qa create testing strategy for Excel export
@@ -203,10 +206,14 @@ Este proyecto incluye un **sistema avanzado de agentes especializados** para des
 ### Estructura del Sistema
 
 ```
-.claude/agents/              # 🤖 Agentes ejecutables (13 agentes)
+.claude/agents/              # 🤖 Agentes ejecutables (14 agentes)
 ├── product.md              # Product Owner Agent
 ├── arq.md                  # Architecture Agent  
 ├── front.md                # Frontend Agent
+├── qa.md                   # QA Agent
+├── backend.md              # Backend Agent
+├── dba.md                  # Database Agent 🆕
+├── devops.md               # DevOps Agent
 ├── qa.md                   # QA Agent
 ├── backend.md              # Backend Agent
 ├── devops.md               # DevOps Agent
