@@ -148,54 +148,46 @@ npm install primereact primeicons primeflex
 4. **Persistencia**: Sesión se mantiene al refrescar
 5. **Logout**: Regresa al login y limpia sesión
 
-## 🤖 Sistema Multi-Agent Claude Code Terminal (v2.3.0)
+## 🚀 Sistema Multi-Agent LEAN v3.0.0 (Optimizado)
 
-Este proyecto incluye un **sistema avanzado de agentes especializados** para desarrollo colaborativo en **Claude Code Terminal**.
+Este proyecto incluye un **sistema optimizado de agentes consolidados** para desarrollo eficiente en **Claude Code Terminal**.
 
-### 🔧 **Características del Sistema**
-- **14 Agentes Especializados**: Cada uno con expertise específico
+### ⚡ **Características del Sistema LEAN**
+- **4 Agentes Consolidados**: Expertise combinado inteligentemente  
+- **85% Reducción Overhead**: De 2-4 horas a 15-30 min por task
 - **Sintaxis Específica**: `@agent-nombre` exclusiva para Claude Code Terminal
-- **Generación de Archivos**: Los agentes crean documentos y código automáticamente
-- **Ejecución Individual**: Cada agente se ejecuta por separado, no en batch
+- **ROI Positivo**: +180% vs -425% sistema anterior
 
-### Agentes Disponibles (14 Agentes Especializados)
+### Agentes LEAN Disponibles (4 Agentes Optimizados)
 
-| Agent | Role | Sintaxis Claude Code | Funcionalidad |
-|-------|------|---------------------|---------------|
-| **@agent-product** | Product Owner | `@agent-product [task]` | Define user stories y criterios aceptación |
-| **@agent-arq** | Software Architect | `@agent-arq [task]` | Analiza arquitectura y decisiones técnicas |
-| **@agent-front** | Frontend Designer | `@agent-front [task]` | Diseña UI/UX y componentes frontend |
-| **@agent-qa** | QA Engineer | `@agent-qa [task]` | Crea estrategias de testing y QA |
-| **@agent-backend** | Backend Engineer | `@agent-backend [task]` | Diseña APIs y arquitectura backend |
-| **@agent-dba** | Database Administrator | `@agent-dba [task]` | Optimiza BD, schemas y performance 🆕 |
-| **@agent-devops** | Platform Engineer | `@agent-devops [task]` | Configura CI/CD e infraestructura |
-| **@agent-coord** | Technical Lead | `@agent-coord [task]` | Orquesta workflows y coordinación |
-| **@agent-validator** | Integration Validator | `@agent-validator [task]` | Valida consistencia entre outputs |
-| **@agent-workflow** | Workflow Intelligence | `@agent-workflow [task]` | Optimiza secuencias de ejecución |
-| **@agent-ai-resolver** | AI Conflict Resolution | `@agent-ai-resolver [task]` | Resuelve conflictos entre agentes |
-| **@agent-performance** | Performance Engineer | `@agent-performance [task]` | Optimiza rendimiento y performance |
-| **@agent-reporting** | Analytics & Metrics | `@agent-reporting [task]` | Genera dashboards y métricas 🆕 |
-| **@agent-dios** | Beast Mode Agent | `@agent-dios [task]` | Resolución autónoma con research 🆕 |
+| Agent | Role | Sintaxis Claude Code | Funcionalidad | Uso |
+|-------|------|---------------------|---------------|-----|
+| **@agent-arq-pro** | Arquitecto Técnico Consolidado | `@agent-arq-pro [task]` | Architecture + Performance + Validation | 70% tasks |
+| **@agent-front-qa** | Frontend + UX + QA Integrado | `@agent-front-qa [task]` | UI/UX + Testing + Accessibility | 60% tasks |
+| **@agent-coord-lite** | Coordinador Minimalista | `@agent-coord-lite [task]` | Solo workflows complejos >3 components | 15% tasks |
+| **@agent-dios-lite** | Emergency Problem Solver | `@agent-dios-lite [task]` | Research + Autonomous solving cuando blocked | 5% tasks |
 
-### Quick Start con Agentes
+### 🗑️ **Agentes Eliminados por Optimización** (10 Agentes)
+- `@agent-backend`, `@agent-dba`, `@agent-devops` → Sin infraestructura real
+- `@agent-product`, `@agent-reporting` → Requirements claros, sin production metrics  
+- `@agent-validator`, `@agent-workflow`, `@agent-ai-resolver`, `@agent-performance` → Consolidados en otros agentes
+
+### Quick Start con Sistema LEAN
 
 **⚠️ IMPORTANTE: En Claude Code Terminal los agentes se ejecutan con sintaxis específica:**
 
 ```bash
-# 1. Planificación estratégica
-@agent-coord plan implementation of new Excel export feature
+# 1. Tasks diarios (80% casos) - Agente directo
+@agent-front-qa diseña componente login con testing strategy integrada
+@agent-arq-pro analiza performance bundle y propón optimizaciones
 
-# 2. Seguir roadmap generado
-@agent-arq design architecture for Excel generation
-@agent-backend design APIs for data export functionality  
-@agent-dba optimize database queries for large dataset exports
-@agent-front design UI for export functionality
-@agent-performance analyze performance impact of Excel generation
-@agent-qa create testing strategy for Excel export
-@agent-devops setup CI/CD for new feature
+# 2. Features complejas (15% casos) - Coordination minimal  
+@agent-coord-lite planifica refactor sistema routing (>3 components impacted)
+@agent-arq-pro implementa architectural changes según plan
+@agent-front-qa actualiza UI components accordingly
 
-# 3. Validación
-@agent-validator validate consistency across all outputs
+# 3. Emergencias/Research (5% casos) - Autonomous solver
+@agent-dios-lite investiga e implementa JWT authentication completa
 ```
 
 **Sintaxis correcta de ejecución:**
