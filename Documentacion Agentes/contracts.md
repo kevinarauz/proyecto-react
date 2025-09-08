@@ -221,79 +221,153 @@ const arquiContract: AgentContract = {
 }
 ```
 
-### 🎨 Frontend Agent (front)
+### 🎨 Frontend UX Research Agent (front) - v3.0.0 Enhanced
 
 ```typescript
 const frontContract: AgentContract = {
   metadata: {
     name: "front",
-    version: "2.0.0", 
-    lastUpdated: "2025-08-20",
-    model: "sonnet"
+    version: "3.0.0", 
+    lastUpdated: "2025-09-08",
+    model: "sonnet",
+    specialization: "UX Research & Frontend Design"
   },
   inputs: {
     required: [
       { name: "technical-constraints", type: "architecture", format: "ADR", source: "arq" },
-      { name: "ui-components", type: "design", format: "markdown", source: "filesystem" }
+      { name: "ui-components", type: "design", format: "markdown", source: "filesystem" },
+      { name: "user-stories", type: "requirements", format: "user-story", source: "product" }
     ],
     optional: [
-      { name: "user-feedback", type: "requirements", format: "user-story", source: "stakeholder" }
+      { name: "user-feedback", type: "user-research", format: "feedback-data", source: "stakeholder" },
+      { name: "analytics-data", type: "analytics", format: "json", source: "reporting" },
+      { name: "performance-metrics", type: "performance", format: "web-vitals", source: "devops" }
     ],
-    dependencies: ["arq"]
+    dependencies: ["product", "arq"]
   },
   outputs: {
     deliverables: [
       {
-        name: "UI/UX Wireframes",
-        type: "wireframe", 
-        format: "textual-description",
-        consumers: ["qa", "devops"],
+        name: "UX Research Report",
+        type: "user-research",
+        format: "research-findings",
+        consumers: ["product", "qa", "coord"],
         updateFrequency: "milestone"
       },
       {
-        name: "Design System Tokens",
-        type: "design-tokens",
-        format: "structured-data",
-        consumers: ["qa", "validator"],
+        name: "User Journey Maps",
+        type: "user-journey",
+        format: "flow-diagram",
+        consumers: ["qa", "backend", "product"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "Usability Audit Report",
+        type: "usability-audit",
+        format: "heuristic-evaluation",
+        consumers: ["qa", "coord", "arq"],
+        updateFrequency: "on-demand"
+      },
+      {
+        name: "Component Usage Analytics",
+        type: "component-analytics",
+        format: "usage-metrics",
+        consumers: ["reporting", "arq", "coord"],
         updateFrequency: "continuous"
       },
       {
-        name: "Accessibility Guidelines",
-        type: "a11y-spec",
-        format: "checklist",
-        consumers: ["qa", "validator"],
+        name: "UI/UX Wireframes",
+        type: "wireframe", 
+        format: "research-justified-design",
+        consumers: ["qa", "devops", "backend"],
         updateFrequency: "milestone"
+      },
+      {
+        name: "Design System Strategy",
+        type: "design-system",
+        format: "evolution-plan",
+        consumers: ["qa", "validator", "arq"],
+        updateFrequency: "continuous"
+      },
+      {
+        name: "Accessibility Research",
+        type: "a11y-research",
+        format: "user-centered-compliance",
+        consumers: ["qa", "validator", "backend"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "A/B Testing Roadmap",
+        type: "ab-testing-plan",
+        format: "experiment-design",
+        consumers: ["reporting", "backend", "devops"],
+        updateFrequency: "milestone"
+      },
+      {
+        name: "Performance-UX Correlation Analysis",
+        type: "perf-ux-analysis",
+        format: "correlation-report",
+        consumers: ["devops", "arq", "reporting"],
+        updateFrequency: "continuous"
       }
     ],
     constraints: [
-      "Mobile-first approach",
-      "WCAG 2.1 AA compliance",
-      "Performance budget respected"
+      "All recommendations backed by user research evidence",
+      "Mobile-first approach with touch accessibility",
+      "WCAG 2.1 AA compliance with user testing validation",
+      "Performance budget respected with UX impact analysis",
+      "Component decisions include adoption metrics analysis"
     ]
   },
   handoffs: {
-    to: ["qa", "validator"],
+    to: ["qa", "backend", "devops", "reporting", "validator"],
     format: {
-      structure: "checklist",
-      sections: ["UI Patterns", "Interaction Flows", "Accessibility Criteria"],
-      validationCriteria: ["All screens wireframed", "Design system consistent"]
+      structure: "research-recommendations-implementation",
+      sections: [
+        "UX Research Executive Summary",
+        "User Journey Pain Points",
+        "Design Recommendations",
+        "A/B Testing Strategy", 
+        "Accessibility & Performance Plan",
+        "Success Metrics & KPIs"
+      ],
+      validationCriteria: [
+        "Research findings supported by quantitative/qualitative data",
+        "All design decisions include user impact justification",
+        "Accessibility requirements tested with diverse users",
+        "Performance recommendations include UX impact assessment"
+      ]
     },
-    timing: "parallel"
+    timing: "sequential"
   },
   triggers: [
-    "Architecture decisions affecting UI",
-    "New user interface requirements",
-    "Accessibility issues reported",
-    "Performance constraints updated"
+    "User research requirements from product owner",
+    "Architecture decisions affecting user experience",
+    "Usability issues reported in production",
+    "Performance constraints impacting user satisfaction",
+    "Accessibility compliance updates needed",
+    "A/B testing results requiring design iteration",
+    "Component usage patterns analysis needed"
   ],
   sla: {
-    responseTime: "6 hours for wireframes, 2 hours for design tokens",
+    responseTime: "4 hours for research insights, 8 hours for comprehensive UX audit, 12 hours for design system strategy",
     quality: [
-      { metric: "Design consistency", target: "100% alignment with design system" },
-      { metric: "Accessibility compliance", target: "WCAG 2.1 AA standards met" },
-      { metric: "Performance impact", target: "UI decisions respect performance budget" }
+      { metric: "Research evidence quality", target: "100% of recommendations backed by user data" },
+      { metric: "User satisfaction impact", target: "Measurable improvement in SUS scores >15%" },
+      { metric: "Accessibility compliance", target: "WCAG 2.1 AA + user testing validation" },
+      { metric: "Performance-UX correlation", target: "All UI decisions include Core Web Vitals impact" },
+      { metric: "Component optimization", target: "Usage analytics inform 80% of design decisions" }
     ]
-  }
+  },
+  researchMethodologies: [
+    "Heuristic Evaluation (Jakob Nielsen principles)",
+    "Cognitive Walkthroughs for critical user tasks",
+    "Component Usage Analytics with React DevTools",
+    "A/B Testing with statistical significance validation",
+    "Accessibility testing with assistive technology users",
+    "Performance-UX correlation analysis",
+    "User Journey Mapping with emotional touchpoints"
+  ]
 }
 ```
 
